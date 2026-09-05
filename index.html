@@ -32,7 +32,7 @@
   [data-theme="rose"] {--cream:#120a10;--cream-deep:#1e0d18;--bark:#fbe6f0;--bark-soft:#b8a0b0;--sky:#1e0d18;--sky-deep:#120a10;--card:#2a1422;--border:#4a2438;--teal:#ff4f8b;--teal-deep:#e0306a;--terracotta:#ff8fab;--honey:#a78bfa;--rose:#ff4f8b;--sage:#4a2438;--shadow:0 4px 20px -4px rgba(0,0,0,.4);--shadow-hover:0 12px 30px -8px rgba(0,0,0,.6)}
   [data-theme="sand"] {--cream:#faf3e8;--cream-deep:#f5ede0;--bark:#2e2418;--bark-soft:#88785a;--sky:#f5ede0;--sky-deep:#ebe0cd;--card:#ffffff;--border:#e0d4bc;--teal:#d97706;--teal-deep:#b45309;--terracotta:#0284c7;--honey:#65a30d;--rose:#d97706;--sage:#88785a;--shadow:0 4px 20px -4px rgba(46,36,24,.05);--shadow-hover:0 12px 30px -8px rgba(46,36,24,.1)}
 
-  /* Seasonal Themes */
+  /* Hidden Seasonal Themes (Triggered by Auto) */
   [data-theme="spring"] {--cream:#FDF6F0;--cream-deep:#F9E8E4;--bark:#4A3B3A;--bark-soft:#7A6A68;--sky:#F9E8E4;--sky-deep:#F0D8D2;--card:#FFFFFF;--border:#E8D5D0;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#E8A87C;--honey:#D4A373;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(74,59,58,.08);--shadow-hover:0 12px 30px -8px rgba(74,59,58,.12)}
   [data-theme="summer"] {--cream:#EAF6F8;--cream-deep:#D6EBF0;--bark:#1A3C48;--bark-soft:#456A78;--sky:#D6EBF0;--sky-deep:#C0DDE6;--card:#FFFFFF;--border:#B0D0DD;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#FFB347;--honey:#FFD166;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(26,60,72,.08);--shadow-hover:0 12px 30px -8px rgba(26,60,72,.12)}
   [data-theme="autumn"] {--cream:#FBF3E4;--cream-deep:#F0E3CC;--bark:#3A2218;--bark-soft:#6A4A3A;--sky:#F0E3CC;--sky-deep:#E8D5B6;--card:#FFFFFF;--border:#D8C5A6;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(58,34,24,.08);--shadow-hover:0 12px 30px -8px rgba(58,34,24,.12)}
@@ -85,8 +85,13 @@
     padding: calc(1.25rem * var(--density));
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     box-shadow: var(--shadow);
+  }
+  .card:hover { 
+    transform: translateY(-2px); 
+    box-shadow: var(--shadow-hover); 
+    border-color: var(--terracotta);
   }
   .card-tight { 
     padding: calc(0.85rem * var(--density)); 
@@ -96,7 +101,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-width: 0; /* Prevents grid blowout */
+    min-width: 0;
   }
 
   /* Buttons */
@@ -113,7 +118,9 @@
 
   /* Modals & Drawers */
   .scrim {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    position: fixed; inset: 0; background: rgba(0,0,0,0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
     z-index: 90;
   }
@@ -125,7 +132,7 @@
     background: var(--cream);
     border-left: 1px solid var(--border);
     transform: translateX(105%);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 100; overflow-y: auto;
     box-shadow: -20px 0 60px rgba(0,0,0,0.25);
   }
@@ -137,7 +144,7 @@
     width: calc(100% - 2rem); max-width: 460px;
     background: var(--cream); border: 1px solid var(--border);
     border-radius: 18px; z-index: 110;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
     opacity: 0; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
     max-height: 70vh; overflow-y: auto;
   }
@@ -271,6 +278,16 @@
     background: linear-gradient(to bottom, var(--cream) 70%, transparent);
     padding-top: env(safe-area-inset-top, 0);
   }
+
+  /* PRO ANIMATIONS */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .anim-temp {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
 </style>
 </head>
 <body data-large-targets="true">
@@ -326,7 +343,7 @@
   </div>
 
   <section aria-label="Current conditions" class="text-center mb-6" id="breathViz">
-    <div class="display text-7xl font-light tracking-tighter" id="tempDisplay">—</div>
+    <div class="display text-7xl font-light tracking-tighter anim-temp" id="tempDisplay">—</div>
     <div class="text-[10px] uppercase tracking-[0.25em] opacity-70 mt-2" id="conditionDisplay">—</div>
   </section>
 
@@ -480,6 +497,209 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
+/* ============================================================
+   StillpointAudio Engine (Integrated)
+   ============================================================ */
+class StillpointAudio {
+    constructor() {
+        this.ctx = null;
+        this.masterGain = null;
+        this.musicGain = null;
+        this.delayNode = null;
+        this.activeNodes = [];
+        this.intervals = [];
+        this.currentVariation = null;
+        this.themeLoop = null;
+        this.currentStep = 0;
+    }
+
+    init() {
+        if (this.ctx) return;
+        this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        this.masterGain = this.ctx.createGain();
+        this.masterGain.gain.value = 0;
+        this.masterGain.connect(this.ctx.destination);
+
+        this.delayNode = this.ctx.createDelay(2.0);
+        this.delayNode.delayTime.value = 0.5;
+        const feedback = this.ctx.createGain();
+        feedback.gain.value = 0.4;
+        this.delayNode.connect(feedback);
+        feedback.connect(this.delayNode);
+        
+        this.musicGain = this.ctx.createGain();
+        this.musicGain.gain.value = 1;
+        
+        this.musicGain.connect(this.masterGain);
+        this.musicGain.connect(this.delayNode);
+        this.delayNode.connect(this.masterGain);
+    }
+
+    playPluck(freq, time, volume, filterFreq, duration = 0.5, waveType = 'triangle') {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        const filter = this.ctx.createBiquadFilter();
+
+        osc.type = waveType; 
+        osc.frequency.value = freq;
+
+        filter.type = 'lowpass';
+        filter.frequency.value = filterFreq;
+        filter.Q.value = 1;
+
+        gain.gain.setValueAtTime(0, time);
+        gain.gain.linearRampToValueAtTime(volume, time + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + duration);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(this.musicGain);
+
+        osc.start(time);
+        osc.stop(time + duration + 0.1);
+        this.activeNodes.push(osc);
+    }
+
+    stop() {
+        if (!this.ctx) return;
+        this.masterGain.gain.cancelScheduledValues(this.ctx.currentTime);
+        this.masterGain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 1.0);
+
+        setTimeout(() => {
+            this.intervals.forEach(clearInterval);
+            this.intervals = [];
+            this.activeNodes.forEach(node => {
+                try { node.stop(); node.disconnect(); } catch(e) {}
+            });
+            this.activeNodes = [];
+            if (this.themeLoop) clearTimeout(this.themeLoop);
+            this.currentVariation = null;
+        }, 1000);
+    }
+
+    play(variation) {
+        this.init();
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        this.stop();
+
+        setTimeout(() => {
+            this.masterGain.gain.setValueAtTime(0, this.ctx.currentTime);
+            this.masterGain.gain.linearRampToValueAtTime(0.8, this.ctx.currentTime + 2.0);
+            this.currentVariation = variation;
+            this.currentStep = 0;
+            this.startThemeSequence();
+        }, 1000);
+    }
+
+    startThemeSequence() {
+        const progression = [
+            [130.81, 164.81, 196.00, 246.94],
+            [110.00, 130.81, 164.81, 196.00],
+            [87.31, 110.00, 130.81, 164.81],
+            [98.00, 123.47, 146.83, 196.00]
+        ];
+
+        let tempo = 300;
+        let volume = 0.15;
+        let filterFreq = 2500;
+        let octaveMultiplier = 1;
+        let noteDuration = 0.6;
+        let playBass = false;
+        let waveType = 'triangle';
+        let sparse = false;
+        let randomBass = false;
+
+        switch(this.currentVariation) {
+            case 'main': 
+                tempo = 300; filterFreq = 2500; break;
+            case 'sunny': 
+                tempo = 180; volume = 0.12; filterFreq = 6000; octaveMultiplier = 2; break; 
+            case 'cloudy': 
+                tempo = 350; volume = 0.12; filterFreq = 1200; octaveMultiplier = 0.5; waveType = 'sine'; noteDuration = 0.8; break;
+            case 'rain': 
+                tempo = 450; volume = 0.1; filterFreq = 700; playBass = true; break; 
+            case 'thunder': 
+                tempo = 600; volume = 0.12; filterFreq = 500; octaveMultiplier = 0.5; noteDuration = 1.2; randomBass = true; break;
+            case 'snow': 
+                tempo = 700; volume = 0.15; filterFreq = 5000; octaveMultiplier = 2; noteDuration = 2.0; break; 
+            case 'fog': 
+                tempo = 800; volume = 0.08; filterFreq = 300; octaveMultiplier = 0.5; playBass = true; noteDuration = 1.5; break; 
+            case 'windy': 
+                tempo = 120; volume = 0.06; filterFreq = 4000; octaveMultiplier = 1.5; noteDuration = 0.3; break;
+            case 'night': 
+                tempo = 500; volume = 0.08; filterFreq = 8000; octaveMultiplier = 4; noteDuration = 1.5; sparse = true; break;
+        }
+
+        const playNext = () => {
+            if (this.currentVariation === null) return;
+            
+            let time = this.ctx.currentTime;
+            let bar = Math.floor(this.currentStep / 4) % 4;
+            let stepIndex = this.currentStep % 4;
+            let currentChord = progression[bar];
+            
+            let shouldPlayNote = true;
+            if (sparse && (stepIndex === 1 || stepIndex === 3)) shouldPlayNote = false;
+
+            if (shouldPlayNote) {
+                let noteFreq = currentChord[stepIndex] * octaveMultiplier;
+                this.playPluck(noteFreq, time, volume, filterFreq, noteDuration, waveType);
+            }
+
+            if (playBass && stepIndex === 0) {
+                this.playPluck(currentChord[0] / 2, time, 0.12, 300, 2.0, 'sine');
+            }
+
+            if (randomBass && Math.random() > 0.7) {
+                this.playPluck(currentChord[0] / 4, time, 0.2, 150, 2.5, 'sawtooth');
+            }
+
+            this.currentStep++;
+            this.themeLoop = setTimeout(playNext, tempo);
+        };
+
+        playNext();
+    }
+}
+
+const stillpointAudio = new StillpointAudio();
+let isPlaying = false;
+
+function getAudioVariation() {
+  if (!state.weather) return 'main';
+  const code = state.weather.current.weather_code;
+  const isDay = state.weather.current.is_day === 1;
+  const windSpeed = state.weather.current.wind_speed_10m;
+
+  if (code >= 95 && code <= 99) return 'thunder';
+  if (code >= 71 && code <= 77 || code === 85 || code === 86) return 'snow';
+  if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) return 'rain';
+  if (code === 45 || code === 48) return 'fog';
+  if (windSpeed > 25) return 'windy';
+  if (code === 0 || code === 1) return isDay ? 'sunny' : 'night';
+  if (code === 2 || code === 3) return 'cloudy';
+  return 'main';
+}
+
+function toggleAudio() {
+  isPlaying = !isPlaying;
+  if (isPlaying) {
+    stillpointAudio.play(getAudioVariation());
+    document.getElementById('audioOffIcon').style.display = 'none';
+    document.getElementById('audioOnIcon').style.display = 'block';
+    showToast('Music on');
+  } else {
+    stillpointAudio.stop();
+    document.getElementById('audioOffIcon').style.display = 'block';
+    document.getElementById('audioOnIcon').style.display = 'none';
+    showToast('Music off');
+  }
+}
+
+/* ============================================================
+   App State & Settings
+   ============================================================ */
 const THEMES = [
   { id: 'light', name: 'Light', bg: '#FAFAF8', accent: '#C5632E' },
   { id: 'dark', name: 'Dark', bg: '#111418', accent: '#C5632E' },
@@ -491,11 +711,7 @@ const THEMES = [
   { id: 'cyber', name: 'Cyber', bg: '#050a08', accent: '#00ff88' },
   { id: 'rose', name: 'Rose', bg: '#120a10', accent: '#ff4f8b' },
   { id: 'sand', name: 'Sand', bg: '#faf3e8', accent: '#d97706' },
-  { id: 'seasonal', name: 'Seasonal (Auto)', bg: '#FAFAF8', accent: '#C5632E' },
-  { id: 'spring', name: 'Spring', bg: '#FDF6F0', accent: '#E8A87C' },
-  { id: 'summer', name: 'Summer', bg: '#EAF6F8', accent: '#FFB347' },
-  { id: 'autumn', name: 'Autumn', bg: '#FBF3E4', accent: '#C5632E' },
-  { id: 'winter', name: 'Winter', bg: '#EEF2F5', accent: '#6B8CAE' }
+  { id: 'seasonal', name: 'Seasonal (Auto)', bg: '#FAFAF8', accent: '#C5632E' }
 ];
 
 const DEFAULTS = {
@@ -518,11 +734,11 @@ function saveSettings() { localStorage.setItem('stillpoint', JSON.stringify(stat
 
 function resolveTheme(themeId) {
   if (themeId !== 'seasonal') return themeId;
-  const month = new Date().getMonth(); // 0-11
-  if (month >= 2 && month <= 4) return 'spring';      // Mar, Apr, May
-  if (month >= 5 && month <= 7) return 'summer';      // Jun, Jul, Aug
-  if (month >= 8 && month <= 10) return 'autumn';     // Sep, Oct, Nov
-  return 'winter';                                   // Dec, Jan, Feb
+  const month = new Date().getMonth();
+  if (month >= 2 && month <= 4) return 'spring';
+  if (month >= 5 && month <= 7) return 'summer';
+  if (month >= 8 && month <= 10) return 'autumn';
+  return 'winter';
 }
 
 function applySettings() {
@@ -650,11 +866,28 @@ async function fetchWeather(lat, lon, name) {
     state.location = { lat, lon, name };
     render();
     updateEffect();
+    if (isPlaying) {
+      stillpointAudio.play(getAudioVariation());
+    }
     document.getElementById('lastUpdated').textContent = 'Updated ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   } catch (e) {
     console.error(e);
     showToast('Could not load weather');
   }
+}
+
+function animateStaggerChildren(container) {
+  if (!container) return;
+  const children = container.children;
+  Array.from(children).forEach((child, i) => {
+    child.style.opacity = '0';
+    child.style.transform = 'translateY(15px)';
+    child.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+    setTimeout(() => {
+      child.style.opacity = '1';
+      child.style.transform = 'translateY(0)';
+    }, 50 + (i * 40));
+  });
 }
 
 function render() {
@@ -669,7 +902,13 @@ function render() {
     weekday: 'long', hour: '2-digit', minute: '2-digit'
   });
 
-  document.getElementById('tempDisplay').textContent = Math.round(convTemp(cur.temperature_2m)) + '°';
+  const tempEl = document.getElementById('tempDisplay');
+  tempEl.textContent = Math.round(convTemp(cur.temperature_2m)) + '°';
+  // Trigger re-flow to restart animation
+  tempEl.classList.remove('anim-temp');
+  void tempEl.offsetWidth;
+  tempEl.classList.add('anim-temp');
+
   document.getElementById('conditionDisplay').textContent = i.label;
   document.getElementById('poemDisplay').textContent = i.poem;
 
@@ -680,7 +919,7 @@ function render() {
     { l: 'UV index',   v: cur.uv_index != null ? cur.uv_index.toFixed(1) : '—' }
   ].map(m => `
     <div class="card card-tight">
-      <div class="text-[10px] uppercase tracking-wider opacity-60 mb-1 whitespace-nowrap overflow-hidden text-ellipsis w-full">${m.l}</div>
+      <div class="text-[10px] uppercase tracking-wider opacity-60 mb-1 whitespace-nowrap overflow-hidden text-ellipsis w-full text-center">${m.l}</div>
       <div class="display text-xl flex items-baseline justify-center gap-1">
         <span>${m.v}</span>
         ${m.u ? `<span class="text-xs opacity-60">${m.u}</span>` : ''}
@@ -749,14 +988,19 @@ function render() {
     { l: 'Wind gusts', v: Math.round(convWind(cur.wind_gusts_10m)), u: windLabel() },
     { l: 'Wind direction', v: windDir(cur.wind_direction_10m) }
   ].map(m => `
-    <div class="card card-tight" style="align-items: flex-start; text-align: left;">
-      <div class="text-[10px] uppercase tracking-wider opacity-60 mb-1 whitespace-nowrap overflow-hidden text-ellipsis w-full">${m.l}</div>
-      <div class="display text-lg flex items-baseline gap-1">
+    <div class="card card-tight">
+      <div class="text-[10px] uppercase tracking-wider opacity-60 mb-1 whitespace-nowrap overflow-hidden text-ellipsis w-full text-center">${m.l}</div>
+      <div class="display text-lg flex items-baseline justify-center gap-1">
         <span>${m.v}</span>
         ${m.u ? `<span class="text-xs opacity-60">${m.u}</span>` : ''}
       </div>
     </div>
   `).join('');
+
+  // Trigger stagger animations
+  animateStaggerChildren(document.getElementById('quickMetrics'));
+  animateStaggerChildren(document.getElementById('hourlyTrack'));
+  animateStaggerChildren(document.getElementById('detailList'));
 }
 
 function saveCurrentPlace(lat, lon, name) {
@@ -889,75 +1133,6 @@ function useGeolocation() {
 }
 
 /* ============================================================
-   Generative Melodic Loop (Web Audio API)
-   ============================================================ */
-let audioCtx = null;
-let masterGain = null;
-let isPlaying = false;
-let schedulerId = null;
-let nextNoteTime = 0;
-let currentNote = 0;
-
-const melody = [
-  { f: 261.63, d: 2 }, { f: 329.63, d: 2 }, { f: 392.00, d: 2 }, { f: 440.00, d: 2 },
-  { f: 523.25, d: 2 }, { f: 440.00, d: 2 }, { f: 392.00, d: 2 }, { f: 329.63, d: 4 }
-];
-
-function initAudio() {
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  masterGain = audioCtx.createGain();
-  masterGain.gain.value = 0;
-  masterGain.connect(audioCtx.destination);
-}
-
-function scheduleNote(noteIndex, time) {
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.type = 'sine';
-  osc.frequency.value = melody[noteIndex].f;
-  const dur = melody[noteIndex].d;
-  gain.gain.setValueAtTime(0, time);
-  gain.gain.linearRampToValueAtTime(0.2, time + 0.1);
-  gain.gain.setValueAtTime(0.2, time + dur - 0.5);
-  gain.gain.exponentialRampToValueAtTime(0.001, time + dur);
-  osc.connect(gain);
-  gain.connect(masterGain);
-  osc.start(time);
-  osc.stop(time + dur);
-}
-
-function schedulerLoop() {
-  while (nextNoteTime < audioCtx.currentTime + 1) {
-    scheduleNote(currentNote, nextNoteTime);
-    nextNoteTime += melody[currentNote].d;
-    currentNote = (currentNote + 1) % melody.length;
-  }
-  schedulerId = setTimeout(schedulerLoop, 25);
-}
-
-function toggleAudio() {
-  if (!audioCtx) initAudio();
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  isPlaying = !isPlaying;
-  if (isPlaying) {
-    masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
-    masterGain.gain.setValueAtTime(masterGain.gain.value, audioCtx.currentTime);
-    masterGain.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.5);
-    currentNote = 0;
-    nextNoteTime = audioCtx.currentTime + 0.1;
-    schedulerLoop();
-  } else {
-    masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
-    masterGain.gain.setValueAtTime(masterGain.gain.value, audioCtx.currentTime);
-    masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
-    clearTimeout(schedulerId);
-  }
-  document.getElementById('audioOffIcon').style.display = isPlaying ? 'none' : 'block';
-  document.getElementById('audioOnIcon').style.display = isPlaying ? 'block' : 'none';
-  showToast(isPlaying ? 'Music on' : 'Music off');
-}
-
-/* ============================================================
    Weather & Seasonal FX Canvas
    ============================================================ */
 const fxCanvas = document.getElementById('fxCanvas');
@@ -1051,7 +1226,6 @@ function updateEffect() {
   const code = state.weather.current.weather_code;
   let effect = 'none';
   
-  // Weather overrides seasonal
   if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82) || (code >= 95 && code <= 99)) {
     effect = 'rain';
   } else if (code >= 71 && code <= 77 || code === 85 || code === 86) {
@@ -1059,12 +1233,11 @@ function updateEffect() {
   } else if (code === 45 || code === 48) {
     effect = 'fog';
   } else {
-    // Seasonal ambient effects
     if (resolvedTheme === 'spring') effect = 'petal';
     else if (resolvedTheme === 'summer') effect = 'dust';
     else if (resolvedTheme === 'autumn') effect = 'leaf';
     else if (resolvedTheme === 'winter') effect = 'lightsnow';
-    else effect = 'dust'; // Fallback for standard themes
+    else effect = 'dust';
   }
   setEffect(effect);
 }
@@ -1075,7 +1248,6 @@ function animate() {
     p.x += p.vx;
     p.y += p.vy;
     
-    // Update logic
     if (p.type === 'rain') {
       if (p.y > fxCanvas.height) { p.y = -p.len; p.x = Math.random() * fxCanvas.width; }
     } else if (p.type === 'snow' || p.type === 'lightsnow') {
@@ -1094,7 +1266,6 @@ function animate() {
       if (p.y < 0) { p.y = fxCanvas.height + 5; p.x = Math.random() * fxCanvas.width; }
     }
 
-    // Draw logic
     if (p.type === 'rain') {
       fxCtx.strokeStyle = `rgba(174, 194, 224, ${p.alpha})`;
       fxCtx.lineWidth = 1;
