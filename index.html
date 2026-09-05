@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dawn" data-font="serif" data-density="comfortable">
+<html lang="en" data-theme="light" data-font="serif" data-density="comfortable">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
@@ -7,7 +7,7 @@
 <meta name="description" content="A meditative weather app focused on calm and clarity.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#F2EADC">
+<meta name="theme-color" content="#FAFAF8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
@@ -20,41 +20,32 @@
     --density: 1;
   }
 
-  /* Theme Definitions */
-  [data-theme="dawn"] {
-    --bg: #F2EADC; --bg-elev: #EBE0CC; --fg: #221E18; --fg-muted: #6B635A;
-    --accent: #B5651D; --accent-soft: #E8C599; --border: rgba(34,30,24,0.14);
-    --card: rgba(235,224,204,0.55); --shadow: rgba(34,30,24,0.08);
-  }
-  [data-theme="dusk"] {
-    --bg: #1A1714; --bg-elev: #25201B; --fg: #F2EADC; --fg-muted: #A8A09A;
-    --accent: #E8A87C; --accent-soft: #5A3F2E; --border: rgba(242,234,220,0.14);
-    --card: rgba(37,32,27,0.65); --shadow: rgba(0,0,0,0.4);
-  }
-  [data-theme="mist"] {
-    --bg: #E2E3DA; --bg-elev: #D2D4C9; --fg: #1F2520; --fg-muted: #5E6360;
-    --accent: #5A7048; --accent-soft: #A8B89A; --border: rgba(31,37,32,0.14);
-    --card: rgba(210,212,201,0.55); --shadow: rgba(31,37,32,0.08);
-  }
-  [data-theme="stone"] {
-    --bg: #FFFFFF; --bg-elev: #F4F4F4; --fg: #000000; --fg-muted: #1F1F1F;
-    --accent: #8B3A00; --accent-soft: #FFE0B0; --border: #000000;
-    --card: #FFFFFF; --shadow: rgba(0,0,0,0.2);
-  }
-  [data-theme="ink"] {
-    --bg: #000000; --bg-elev: #0E0E0E; --fg: #FFFFFF; --fg-muted: #E0E0E0;
-    --accent: #FFB347; --accent-soft: #3A2A00; --border: #FFFFFF;
-    --card: #0E0E0E; --shadow: rgba(0,0,0,0.6);
-  }
+  /* User Provided Themes */
+  [data-theme="light"] {--cream:#FAFAF8;--cream-deep:#F0EDE8;--bark:#1A2C38;--bark-soft:#5A6B75;--sky:#EFF2F4;--sky-deep:#DCE2E5;--card:#FFFFFF;--border:#E5E2DD;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 10px 40px -10px rgba(26, 44, 56, 0.06);--shadow-hover:0 20px 50px -15px rgba(26, 44, 56, 0.12)}
+  [data-theme="dark"] {--cream:#111418;--cream-deep:#1B2026;--bark:#E0E6EA;--bark-soft:#94A3B8;--sky:#1B2026;--sky-deep:#111418;--card:#1B2026;--border:#2D333B;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(0,0,0,.2);--shadow-hover:0 12px 30px -8px rgba(0,0,0,.4)}
+  [data-theme="warm"] {--cream:#FAF5EB;--cream-deep:#EDE3CC;--bark:#3B2E25;--bark-soft:#6B5544;--sky:#EFE5D2;--sky-deep:#E5D8BD;--card:#FFFAF0;--border:#E0D2B6;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(59,46,37,.08);--shadow-hover:0 12px 30px -8px rgba(59,46,37,.12)}
+  [data-theme="soft"] {--cream:#F8FAFC;--cream-deep:#E2E8F0;--bark:#1E293B;--bark-soft:#475569;--sky:#EFF6FF;--sky-deep:#DBEAFE;--card:#FFF;--border:#CBD5E1;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(30,41,59,.05);--shadow-hover:0 12px 30px -8px rgba(30,41,59,.1)}
+  [data-theme="high-contrast"] {--cream:#000;--cream-deep:#000;--bark:#FFF;--bark-soft:#FFF;--sky:#000;--sky-deep:#000;--card:#000;--border:#FFF;--teal:#FFFF00;--teal-deep:#FFFF00;--terracotta:#00FF00;--honey:#FFFF00;--rose:#FF00FF;--sage:#00FFFF;--shadow:none;--shadow-hover:none}
+  [data-theme="ocean"] {--cream:#04101a;--cream-deep:#0a1c2a;--bark:#e6f0fa;--bark-soft:#8da3b8;--sky:#0a1c2a;--sky-deep:#04101a;--card:#0f2438;--border:#1c3a4f;--teal:#00d4aa;--teal-deep:#00b894;--terracotta:#facc15;--honey:#00a8ff;--rose:#00d4aa;--sage:#1c3a4f;--shadow:0 4px 20px -4px rgba(0,0,0,.4);--shadow-hover:0 12px 30px -8px rgba(0,0,0,.6)}
+  [data-theme="ember"] {--cream:#120505;--cream-deep:#1e0d0d;--bark:#fbeaea;--bark-soft:#b8a0a0;--sky:#1e0d0d;--sky-deep:#120505;--card:#2a1414;--border:#4a2424;--teal:#ff5c5c;--teal-deep:#ff3838;--terracotta:#ff9d5c;--honey:#ffcc5c;--rose:#ff5c5c;--sage:#4a2424;--shadow:0 4px 20px -4px rgba(0,0,0,.4);--shadow-hover:0 12px 30px -8px rgba(0,0,0,.6)}
+  [data-theme="cyber"] {--cream:#050a08;--cream-deep:#0a1410;--bark:#e6f0ea;--bark-soft:#8da3b8;--sky:#0a1410;--sky-deep:#050a08;--card:#0f1f18;--border:#1c3a2c;--teal:#00ff88;--teal-deep:#00cc66;--terracotta:#00ffcc;--honey:#facc15;--rose:#00ff88;--sage:#1c3a2c;--shadow:0 4px 20px -4px rgba(0,0,0,.4);--shadow-hover:0 12px 30px -8px rgba(0,0,0,.6)}
+  [data-theme="rose"] {--cream:#120a10;--cream-deep:#1e0d18;--bark:#fbe6f0;--bark-soft:#b8a0b0;--sky:#1e0d18;--sky-deep:#120a10;--card:#2a1422;--border:#4a2438;--teal:#ff4f8b;--teal-deep:#e0306a;--terracotta:#ff8fab;--honey:#a78bfa;--rose:#ff4f8b;--sage:#4a2438;--shadow:0 4px 20px -4px rgba(0,0,0,.4);--shadow-hover:0 12px 30px -8px rgba(0,0,0,.6)}
+  [data-theme="sand"] {--cream:#faf3e8;--cream-deep:#f5ede0;--bark:#2e2418;--bark-soft:#88785a;--sky:#f5ede0;--sky-deep:#ebe0cd;--card:#ffffff;--border:#e0d4bc;--teal:#d97706;--teal-deep:#b45309;--terracotta:#0284c7;--honey:#65a30d;--rose:#d97706;--sage:#88785a;--shadow:0 4px 20px -4px rgba(46,36,24,.05);--shadow-hover:0 12px 30px -8px rgba(46,36,24,.1)}
+
+  /* Seasonal Themes */
+  [data-theme="spring"] {--cream:#FDF6F0;--cream-deep:#F9E8E4;--bark:#4A3B3A;--bark-soft:#7A6A68;--sky:#F9E8E4;--sky-deep:#F0D8D2;--card:#FFFFFF;--border:#E8D5D0;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#E8A87C;--honey:#D4A373;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(74,59,58,.08);--shadow-hover:0 12px 30px -8px rgba(74,59,58,.12)}
+  [data-theme="summer"] {--cream:#EAF6F8;--cream-deep:#D6EBF0;--bark:#1A3C48;--bark-soft:#456A78;--sky:#D6EBF0;--sky-deep:#C0DDE6;--card:#FFFFFF;--border:#B0D0DD;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#FFB347;--honey:#FFD166;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(26,60,72,.08);--shadow-hover:0 12px 30px -8px rgba(26,60,72,.12)}
+  [data-theme="autumn"] {--cream:#FBF3E4;--cream-deep:#F0E3CC;--bark:#3A2218;--bark-soft:#6A4A3A;--sky:#F0E3CC;--sky-deep:#E8D5B6;--card:#FFFFFF;--border:#D8C5A6;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(58,34,24,.08);--shadow-hover:0 12px 30px -8px rgba(58,34,24,.12)}
+  [data-theme="winter"] {--cream:#EEF2F5;--cream-deep:#DCE3E8;--bark:#1B2733;--bark-soft:#4A5A6A;--sky:#DCE3E8;--sky-deep:#C5D0D8;--card:#FFFFFF;--border:#B0BFC8;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#6B8CAE;--honey:#A2B2C3;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(27,39,51,.08);--shadow-hover:0 12px 30px -8px rgba(27,39,51,.12)}
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
     font-family: var(--font-body);
-    background: var(--bg);
-    color: var(--fg);
+    background: var(--cream);
+    color: var(--bark);
     font-size: calc(16px * var(--text-scale));
-    line-height: 1.6;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.6s ease, color 0.6s ease;
     overflow-x: hidden;
@@ -69,12 +60,12 @@
   }
   .atmosphere::before {
     top: -15%; left: -10%; width: 60%; height: 60%;
-    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 65%);
-    opacity: 0.4;
+    background: radial-gradient(circle, var(--honey) 0%, transparent 65%);
+    opacity: 0.25;
   }
   .atmosphere::after {
     bottom: -20%; right: -15%; width: 70%; height: 70%;
-    background: radial-gradient(circle, var(--accent) 0%, transparent 65%);
+    background: radial-gradient(circle, var(--terracotta) 0%, transparent 65%);
     opacity: 0.15;
     animation-delay: -10s; animation-direction: reverse;
   }
@@ -83,33 +74,8 @@
     50% { transform: translate(8%, 10%) scale(1.15); }
   }
 
-  /* Smooth Breathing Glow */
-  .breath-viz {
-    width: 260px; height: 260px; position: relative; margin: 0 auto 2rem;
-    display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;
-  }
-  .glow {
-    position: absolute; border-radius: 50%; filter: blur(30px); pointer-events: none;
-  }
-  .glow-1 {
-    width: 100%; height: 100%;
-    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 65%);
-    animation: pulse-soft 8s ease-in-out infinite;
-  }
-  .glow-2 {
-    width: 65%; height: 65%;
-    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-    animation: pulse-soft 8s ease-in-out infinite reverse;
-    animation-delay: -2s;
-    opacity: 0.5;
-  }
-  .breath-content {
-    position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;
-  }
-  @keyframes pulse-soft {
-    0%, 100% { transform: scale(0.85); opacity: 0.35; }
-    50% { transform: scale(1.1); opacity: 0.75; }
-  }
+  /* Weather/Seasonal FX Canvas */
+  #fxCanvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
 
   /* Cards */
   .card {
@@ -119,19 +85,29 @@
     padding: calc(1.25rem * var(--density));
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow);
   }
-  .card-tight { padding: calc(0.85rem * var(--density)); border-radius: 14px; }
+  .card-tight { 
+    padding: calc(0.85rem * var(--density)); 
+    border-radius: 14px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-width: 0; /* Prevents grid blowout */
+  }
 
   /* Buttons */
   .btn {
     font-family: var(--font-body); font-size: 0.9rem;
     padding: 0.55rem 1.05rem; border-radius: 999px;
-    border: 1px solid var(--border); background: var(--bg-elev); color: var(--fg);
+    border: 1px solid var(--border); background: var(--cream-deep); color: var(--bark);
     cursor: pointer; transition: all 0.2s ease;
     display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px;
   }
-  .btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .btn:hover { border-color: var(--terracotta); transform: translateY(-1px); }
   .btn:active { transform: translateY(0); }
   .btn-icon { padding: 0.55rem; min-width: 44px; min-height: 44px; justify-content: center; }
 
@@ -146,12 +122,12 @@
   .drawer {
     position: fixed; top: 0; right: 0; bottom: 0;
     width: min(440px, 100%);
-    background: var(--bg);
+    background: var(--cream);
     border-left: 1px solid var(--border);
     transform: translateX(105%);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 100; overflow-y: auto;
-    box-shadow: -20px 0 60px var(--shadow);
+    box-shadow: -20px 0 60px rgba(0,0,0,0.25);
   }
   .drawer.open { transform: translateX(0); }
 
@@ -159,10 +135,10 @@
     position: fixed; top: 20%; left: 50%;
     transform: translate(-50%, -150%);
     width: calc(100% - 2rem); max-width: 460px;
-    background: var(--bg); border: 1px solid var(--border);
+    background: var(--cream); border: 1px solid var(--border);
     border-radius: 18px; z-index: 110;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
-    opacity: 0; box-shadow: 0 20px 60px var(--shadow);
+    opacity: 0; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
     max-height: 70vh; overflow-y: auto;
   }
   .modal.open { transform: translate(-50%, 0); opacity: 1; }
@@ -171,11 +147,11 @@
   .hourly-track {
     display: flex; gap: 0.5rem; overflow-x: auto;
     scroll-snap-type: x mandatory; padding: 0.25rem;
-    margin: 0 -0.25rem; scrollbar-width: thin; scrollbar-color: var(--accent) transparent;
+    margin: 0 -0.25rem; scrollbar-width: thin; scrollbar-color: var(--terracotta) transparent;
   }
   .hourly-track::-webkit-scrollbar { height: 4px; }
-  .hourly-track::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
-  .hourly-track > * { flex: 0 0 auto; scroll-snap-align: start; min-width: 68px; }
+  .hourly-track::-webkit-scrollbar-thumb { background: var(--terracotta); border-radius: 2px; }
+  .hourly-track > * { flex: 0 0 auto; scroll-snap-align: start; min-width: 72px; }
 
   /* Range slider */
   input[type="range"] {
@@ -184,12 +160,12 @@
   }
   input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none; appearance: none;
-    width: 22px; height: 22px; background: var(--accent);
-    border-radius: 50%; cursor: pointer; border: 3px solid var(--bg);
+    width: 22px; height: 22px; background: var(--terracotta);
+    border-radius: 50%; cursor: pointer; border: 3px solid var(--cream);
   }
   input[type="range"]::-moz-range-thumb {
-    width: 22px; height: 22px; background: var(--accent);
-    border-radius: 50%; cursor: pointer; border: 3px solid var(--bg);
+    width: 22px; height: 22px; background: var(--terracotta);
+    border-radius: 50%; cursor: pointer; border: 3px solid var(--cream);
   }
 
   /* Toggle switch */
@@ -202,38 +178,30 @@
   .slider::before {
     position: absolute; content: '';
     height: 20px; width: 20px; left: 4px; top: 4px;
-    background: var(--fg); border-radius: 50%; transition: 0.3s;
+    background: var(--bark); border-radius: 50%; transition: 0.3s;
   }
-  input:checked + .slider { background: var(--accent); }
-  input:checked + .slider::before { transform: translateX(20px); background: var(--bg); }
-  input:focus-visible + .slider { box-shadow: 0 0 0 3px var(--accent-soft); }
+  input:checked + .slider { background: var(--terracotta); }
+  input:checked + .slider::before { transform: translateX(20px); background: var(--cream); }
+  input:focus-visible + .slider { box-shadow: 0 0 0 3px var(--honey); }
 
   /* Select */
   select {
-    background: var(--bg-elev); color: var(--fg);
+    background: var(--cream-deep); color: var(--bark);
     border: 1px solid var(--border); border-radius: 999px;
     padding: 0.5rem 1rem; font-family: var(--font-body); font-size: 0.9rem;
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat; background-position: right 0.8rem center;
     padding-right: 2.2rem;
+    max-width: 60%;
   }
-
-  /* Theme Circles */
-  .theme-circle {
-    width: 52px; height: 52px; border-radius: 50%;
-    border: 3px solid transparent; cursor: pointer; position: relative;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-    background-clip: padding-box;
-  }
-  .theme-circle:hover { transform: scale(1.08); }
-  .theme-circle.active { border-color: var(--fg); transform: scale(1.05); }
+  select option { background: var(--cream); color: var(--bark); }
 
   /* Focus */
-  *:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+  *:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 2px; border-radius: 6px; }
   .skip-link {
     position: absolute; top: -100px; left: 1rem;
-    background: var(--accent); color: var(--bg);
+    background: var(--terracotta); color: var(--cream);
     padding: 0.75rem 1.25rem; border-radius: 0 0 12px 12px;
     z-index: 200; text-decoration: none; font-weight: 600;
   }
@@ -243,11 +211,11 @@
   .toast {
     position: fixed; bottom: 1.5rem; left: 50%;
     transform: translateX(-50%) translateY(150%);
-    background: var(--fg); color: var(--bg);
+    background: var(--bark); color: var(--cream);
     padding: 0.75rem 1.4rem; border-radius: 999px;
     font-size: 0.85rem; z-index: 300;
     transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
-    box-shadow: 0 8px 24px var(--shadow);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   }
   .toast.show { transform: translateX(-50%) translateY(0); }
 
@@ -271,7 +239,6 @@
     transition-duration: 0.001ms !important;
   }
   [data-reduce-motion="true"] .atmosphere { display: none; }
-  [data-reduce-motion="true"] .glow { animation: none; opacity: 0.4; }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -284,24 +251,24 @@
   .ptr-hint {
     position: fixed; top: 0; left: 0; right: 0; height: 0;
     overflow: hidden; display: flex; align-items: center; justify-content: center;
-    color: var(--fg-muted); font-size: 0.85rem; z-index: 50;
+    color: var(--bark-soft); font-size: 0.85rem; z-index: 50;
     transition: height 0.2s ease;
   }
 
   /* Daily range bar */
   .range-bar { position: relative; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
   .range-fill {
-    position: absolute; height: 100%; background: var(--accent); border-radius: 3px;
+    position: absolute; height: 100%; background: var(--terracotta); border-radius: 3px;
     transition: all 0.4s ease;
   }
 
-  body { scrollbar-width: thin; scrollbar-color: var(--accent) transparent; }
+  body { scrollbar-width: thin; scrollbar-color: var(--terracotta) transparent; }
   body::-webkit-scrollbar { width: 6px; }
-  body::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+  body::-webkit-scrollbar-thumb { background: var(--terracotta); border-radius: 3px; }
 
   .top-bar {
     position: sticky; top: 0; z-index: 40;
-    background: linear-gradient(to bottom, var(--bg) 70%, transparent);
+    background: linear-gradient(to bottom, var(--cream) 70%, transparent);
     padding-top: env(safe-area-inset-top, 0);
   }
 </style>
@@ -310,6 +277,7 @@
 
 <a href="#main" class="skip-link">Skip to weather</a>
 
+<canvas id="fxCanvas"></canvas>
 <div class="atmosphere" aria-hidden="true"></div>
 <div class="ptr-hint" id="ptrHint">Release to refresh</div>
 
@@ -319,31 +287,47 @@
     <button id="searchBtn" class="btn btn-icon" aria-label="Search location">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
     </button>
-    <h1 class="display text-lg tracking-[0.15em] font-medium uppercase">Stillpoint</h1>
-    <button id="refreshBtn" class="btn btn-icon" aria-label="Refresh weather">
-      <svg id="refreshIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
-    </button>
-    <button id="settingsBtn" class="btn btn-icon" aria-label="Open settings">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-    </button>
+    <div class="flex items-center gap-2">
+      <svg width="24" height="24" viewBox="0 0 1024 1024" aria-hidden="true">
+        <circle cx="512" cy="512" r="320" fill="var(--terracotta)" opacity="0.15"/>
+        <circle cx="512" cy="512" r="220" fill="var(--terracotta)" opacity="0.3"/>
+        <circle cx="512" cy="512" r="120" fill="var(--terracotta)"/>
+      </svg>
+      <h1 class="display text-lg tracking-[0.15em] font-medium uppercase">Stillpoint</h1>
+    </div>
+    <div class="flex gap-2">
+      <button id="audioBtn" class="btn btn-icon" aria-label="Toggle ambient theme tune">
+        <svg id="audioOffIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        <svg id="audioOnIcon" style="display:none" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+      </button>
+      <button id="refreshBtn" class="btn btn-icon" aria-label="Refresh weather">
+        <svg id="refreshIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
+      </button>
+      <button id="settingsBtn" class="btn btn-icon" aria-label="Open settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
 <!-- Main -->
 <main id="main" class="relative z-10 max-w-2xl mx-auto px-5 pb-32">
-  <div class="text-center mb-8 mt-4">
+  <div class="flex justify-center mb-6 mt-4">
+    <svg width="64" height="64" viewBox="0 0 1024 1024" aria-hidden="true">
+      <circle cx="512" cy="512" r="320" fill="var(--terracotta)" opacity="0.15"/>
+      <circle cx="512" cy="512" r="220" fill="var(--terracotta)" opacity="0.3"/>
+      <circle cx="512" cy="512" r="120" fill="var(--terracotta)"/>
+    </svg>
+  </div>
+  
+  <div class="text-center mb-8">
     <p id="locationName" class="display text-base tracking-[0.2em] opacity-70">LOCATING…</p>
     <p id="localTime" class="text-xs opacity-50 mt-1.5"></p>
   </div>
 
-  <!-- Smooth Glow -->
-  <section aria-label="Current conditions" class="breath-viz mb-6" id="breathViz">
-    <div class="glow glow-1" aria-hidden="true"></div>
-    <div class="glow glow-2" aria-hidden="true"></div>
-    <div class="breath-content">
-      <div class="display text-7xl font-light tracking-tighter" id="tempDisplay">—</div>
-      <div class="text-[10px] uppercase tracking-[0.25em] opacity-70 mt-1" id="conditionDisplay">—</div>
-    </div>
+  <section aria-label="Current conditions" class="text-center mb-6" id="breathViz">
+    <div class="display text-7xl font-light tracking-tighter" id="tempDisplay">—</div>
+    <div class="text-[10px] uppercase tracking-[0.25em] opacity-70 mt-2" id="conditionDisplay">—</div>
   </section>
 
   <blockquote id="poemDisplay" class="display text-center italic text-lg leading-relaxed max-w-md mx-auto mb-10 opacity-85 px-2">
@@ -383,13 +367,14 @@
       </button>
     </div>
 
-    <!-- Theme -->
     <section class="mb-7">
-      <h3 class="text-[10px] uppercase tracking-[0.25em] opacity-60 mb-4">Atmosphere</h3>
-      <div class="flex justify-between gap-3" id="themePicker"></div>
+      <h3 class="text-[10px] uppercase tracking-[0.25em] opacity-60 mb-3">Atmosphere</h3>
+      <div class="flex items-center justify-between">
+        <label for="themeSelect">Theme</label>
+        <select id="themeSelect"></select>
+      </div>
     </section>
 
-    <!-- Units -->
     <section class="mb-7">
       <h3 class="text-[10px] uppercase tracking-[0.25em] opacity-60 mb-3">Units</h3>
       <div class="space-y-3">
@@ -408,7 +393,6 @@
       </div>
     </section>
 
-    <!-- Display -->
     <section class="mb-7">
       <h3 class="text-[10px] uppercase tracking-[0.25em] opacity-60 mb-3">Display</h3>
       <div class="space-y-4">
@@ -430,7 +414,6 @@
       </div>
     </section>
 
-    <!-- Sections -->
     <section class="mb-7">
       <h3 class="text-[10px] uppercase tracking-[0.25em] opacity-60 mb-3">Show</h3>
       <div class="space-y-3">
@@ -453,7 +436,6 @@
       </div>
     </section>
 
-    <!-- Accessibility -->
     <section class="mb-7">
       <h3 class="text-[10px] uppercase tracking-[0.25em] opacity-60 mb-3">Accessibility</h3>
       <div class="space-y-3">
@@ -462,17 +444,12 @@
           <span class="switch"><input type="checkbox" id="reduceMotion"><span class="slider"></span></span>
         </label>
         <label class="flex items-center justify-between cursor-pointer">
-          <span>High contrast theme</span>
-          <span class="switch"><input type="checkbox" id="highContrast"><span class="slider"></span></span>
-        </label>
-        <label class="flex items-center justify-between cursor-pointer">
           <span>Large tap targets</span>
           <span class="switch"><input type="checkbox" id="largeTargets" checked><span class="slider"></span></span>
         </label>
       </div>
     </section>
 
-    <!-- Saved places -->
     <section class="mb-7">
       <h3 class="text-[10px] uppercase tracking-[0.25em] opacity-60 mb-3">Saved places</h3>
       <div id="savedPlaces" class="space-y-2"></div>
@@ -500,23 +477,31 @@
   </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 const THEMES = [
-  { id: 'dawn',  name: 'Dawn',  bg: '#F2EADC', fg: '#221E18', accent: '#B5651D' },
-  { id: 'dusk',  name: 'Dusk',  bg: '#1A1714', fg: '#F2EADC', accent: '#E8A87C' },
-  { id: 'mist',  name: 'Mist',  bg: '#E2E3DA', fg: '#1F2520', accent: '#5A7048' },
-  { id: 'stone', name: 'Stone', bg: '#FFFFFF', fg: '#000000', accent: '#8B3A00' },
-  { id: 'ink',   name: 'Ink',   bg: '#000000', fg: '#FFFFFF', accent: '#FFB347' }
+  { id: 'light', name: 'Light', bg: '#FAFAF8', accent: '#C5632E' },
+  { id: 'dark', name: 'Dark', bg: '#111418', accent: '#C5632E' },
+  { id: 'warm', name: 'Warm', bg: '#FAF5EB', accent: '#C5632E' },
+  { id: 'soft', name: 'Soft', bg: '#F8FAFC', accent: '#C5632E' },
+  { id: 'high-contrast', name: 'High Contrast', bg: '#000000', accent: '#00FF00' },
+  { id: 'ocean', name: 'Ocean', bg: '#04101a', accent: '#00d4aa' },
+  { id: 'ember', name: 'Ember', bg: '#120505', accent: '#ff5c5c' },
+  { id: 'cyber', name: 'Cyber', bg: '#050a08', accent: '#00ff88' },
+  { id: 'rose', name: 'Rose', bg: '#120a10', accent: '#ff4f8b' },
+  { id: 'sand', name: 'Sand', bg: '#faf3e8', accent: '#d97706' },
+  { id: 'seasonal', name: 'Seasonal (Auto)', bg: '#FAFAF8', accent: '#C5632E' },
+  { id: 'spring', name: 'Spring', bg: '#FDF6F0', accent: '#E8A87C' },
+  { id: 'summer', name: 'Summer', bg: '#EAF6F8', accent: '#FFB347' },
+  { id: 'autumn', name: 'Autumn', bg: '#FBF3E4', accent: '#C5632E' },
+  { id: 'winter', name: 'Winter', bg: '#EEF2F5', accent: '#6B8CAE' }
 ];
 
 const DEFAULTS = {
-  theme: 'dawn', font: 'serif', tempUnit: 'c', windUnit: 'kmh', pressureUnit: 'hpa',
+  theme: 'light', font: 'serif', tempUnit: 'c', windUnit: 'kmh', pressureUnit: 'hpa',
   textScale: 100, density: 'comfortable', showPoem: true, showHourly: true,
-  showDaily: true, showDetails: true, reduceMotion: false, highContrast: false,
-  largeTargets: true, savedPlaces: []
+  showDaily: true, showDetails: true, reduceMotion: false, largeTargets: true, savedPlaces: []
 };
 
 const state = {
@@ -531,13 +516,18 @@ function loadSettings() {
 }
 function saveSettings() { localStorage.setItem('stillpoint', JSON.stringify(state.settings)); }
 
-function effectiveTheme() {
-  if (!state.settings.highContrast) return state.settings.theme;
-  return (state.settings.theme === 'dusk' || state.settings.theme === 'ink') ? 'ink' : 'stone';
+function resolveTheme(themeId) {
+  if (themeId !== 'seasonal') return themeId;
+  const month = new Date().getMonth(); // 0-11
+  if (month >= 2 && month <= 4) return 'spring';      // Mar, Apr, May
+  if (month >= 5 && month <= 7) return 'summer';      // Jun, Jul, Aug
+  if (month >= 8 && month <= 10) return 'autumn';     // Sep, Oct, Nov
+  return 'winter';                                   // Dec, Jan, Feb
 }
 
 function applySettings() {
-  document.documentElement.dataset.theme = effectiveTheme();
+  const resolvedTheme = resolveTheme(state.settings.theme);
+  document.documentElement.dataset.theme = resolvedTheme;
   document.documentElement.dataset.font = state.settings.font;
   document.documentElement.dataset.density = state.settings.density;
   document.documentElement.dataset.reduceMotion = state.settings.reduceMotion;
@@ -561,10 +551,9 @@ function applySettings() {
   document.getElementById('showDaily').checked = state.settings.showDaily;
   document.getElementById('showDetails').checked = state.settings.showDetails;
   document.getElementById('reduceMotion').checked = state.settings.reduceMotion;
-  document.getElementById('highContrast').checked = state.settings.highContrast;
   document.getElementById('largeTargets').checked = state.settings.largeTargets;
 
-  const t = THEMES.find(x => x.id === effectiveTheme());
+  const t = THEMES.find(x => x.id === resolvedTheme);
   if (t) document.querySelector('meta[name="theme-color"]').setAttribute('content', t.bg);
 
   renderThemePicker();
@@ -604,7 +593,6 @@ const WEATHER_INFO = {
 function info(code) { return WEATHER_INFO[code] || { label: '—', poem: 'The sky holds its breath, waiting.' }; }
 
 const convTemp = c => state.settings.tempUnit === 'f' ? c * 9/5 + 32 : c;
-const tempLabel = () => state.settings.tempUnit === 'f' ? '°F' : '°C';
 function convWind(kmh) {
   switch (state.settings.windUnit) {
     case 'mph': return kmh * 0.621371;
@@ -661,6 +649,7 @@ async function fetchWeather(lat, lon, name) {
     state.weather = data;
     state.location = { lat, lon, name };
     render();
+    updateEffect();
     document.getElementById('lastUpdated').textContent = 'Updated ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   } catch (e) {
     console.error(e);
@@ -690,9 +679,12 @@ function render() {
     { l: 'Wind',       v: Math.round(convWind(cur.wind_speed_10m)), u: windLabel() },
     { l: 'UV index',   v: cur.uv_index != null ? cur.uv_index.toFixed(1) : '—' }
   ].map(m => `
-    <div class="card card-tight text-center">
-      <div class="text-[10px] uppercase tracking-wider opacity-60 mb-1">${m.l}</div>
-      <div class="display text-xl">${m.v}${m.u ? `<span class="text-xs opacity-60 ml-1">${m.u}</span>` : ''}</div>
+    <div class="card card-tight">
+      <div class="text-[10px] uppercase tracking-wider opacity-60 mb-1 whitespace-nowrap overflow-hidden text-ellipsis w-full">${m.l}</div>
+      <div class="display text-xl flex items-baseline justify-center gap-1">
+        <span>${m.v}</span>
+        ${m.u ? `<span class="text-xs opacity-60">${m.u}</span>` : ''}
+      </div>
     </div>
   `).join('');
 
@@ -705,11 +697,11 @@ function render() {
     const precip = w.hourly.precipitation_probability[h.idx] || 0;
     const label = h.t.getHours() + ':00';
     return `
-      <div class="card card-tight text-center">
-        <div class="text-[10px] uppercase tracking-wider opacity-60">${label}</div>
+      <div class="card card-tight" style="min-height: 110px;">
+        <div class="text-[10px] uppercase tracking-wider opacity-60 whitespace-nowrap">${label}</div>
         <div class="my-1.5 flex justify-center">${icon(code, 26)}</div>
-        <div class="display text-lg">${Math.round(convTemp(temp))}°</div>
-        ${precip > 5 ? `<div class="text-[10px] opacity-60 mt-0.5">${precip}%</div>` : '<div class="text-[10px] opacity-0 mt-0.5">·</div>'}
+        <div class="display text-lg whitespace-nowrap">${Math.round(convTemp(temp))}°</div>
+        <div class="text-[10px] opacity-60 mt-0.5 h-[14px]">${precip > 5 ? precip + '%' : ''}</div>
       </div>
     `;
   }).join('');
@@ -732,17 +724,17 @@ function render() {
     const width = Math.max(8, ((maxC - minC) / allRange) * 100);
 
     return `
-      <div class="flex items-center gap-3 py-2.5 border-b last:border-0" style="border-color: var(--border);">
-        <div class="w-14 text-sm">${day}</div>
-        <div class="w-8 flex justify-center">${icon(code, 24)}</div>
-        <div class="flex-1 flex items-center gap-2.5">
-          <span class="text-sm opacity-60 w-8 text-right">${min}°</span>
+      <div class="flex items-center gap-2 sm:gap-3 py-2.5 border-b last:border-0" style="border-color: var(--border);">
+        <div class="w-10 sm:w-14 text-sm whitespace-nowrap">${day}</div>
+        <div class="w-8 flex justify-center flex-shrink-0">${icon(code, 24)}</div>
+        <div class="flex-1 flex items-center gap-2 min-w-0">
+          <span class="text-sm opacity-60 w-8 sm:w-10 text-right whitespace-nowrap">${min}°</span>
           <div class="range-bar flex-1">
             <div class="range-fill" style="left: ${left}%; width: ${width}%;"></div>
           </div>
-          <span class="text-sm w-8">${max}°</span>
+          <span class="text-sm w-8 sm:w-10 whitespace-nowrap">${max}°</span>
         </div>
-        ${precip > 5 ? `<div class="text-[10px] opacity-60 w-10 text-right">${precip}%</div>` : '<div class="w-10"></div>'}
+        <div class="text-[10px] opacity-60 w-8 sm:w-10 text-right whitespace-nowrap">${precip > 5 ? precip + '%' : ''}</div>
       </div>
     `;
   }).join('');
@@ -757,9 +749,12 @@ function render() {
     { l: 'Wind gusts', v: Math.round(convWind(cur.wind_gusts_10m)), u: windLabel() },
     { l: 'Wind direction', v: windDir(cur.wind_direction_10m) }
   ].map(m => `
-    <div class="card card-tight">
-      <div class="text-[10px] uppercase tracking-wider opacity-60 mb-1">${m.l}</div>
-      <div class="display text-lg">${m.v}${m.u ? `<span class="text-xs opacity-60 ml-1">${m.u}</span>` : ''}</div>
+    <div class="card card-tight" style="align-items: flex-start; text-align: left;">
+      <div class="text-[10px] uppercase tracking-wider opacity-60 mb-1 whitespace-nowrap overflow-hidden text-ellipsis w-full">${m.l}</div>
+      <div class="display text-lg flex items-baseline gap-1">
+        <span>${m.v}</span>
+        ${m.u ? `<span class="text-xs opacity-60">${m.u}</span>` : ''}
+      </div>
     </div>
   `).join('');
 }
@@ -780,16 +775,16 @@ function renderSavedPlaces() {
     return;
   }
   c.innerHTML = state.settings.savedPlaces.map(p => `
-    <button class="w-full text-left p-3 rounded-xl border flex justify-between items-center" style="border-color: var(--border); background: var(--bg-elev);" data-lat="${p.lat}" data-lon="${p.lon}" data-name="${p.name}">
-      <span class="text-sm">${p.name}</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+    <button class="w-full text-left p-3 rounded-xl border flex justify-between items-center" style="border-color: var(--border); background: var(--cream-deep);" data-lat="${p.lat}" data-lon="${p.lon}" data-name="${p.name}">
+      <span class="text-sm truncate">${p.name}</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="flex-shrink-0"><path d="m9 18 6-6-6-6"/></svg>
     </button>
   `).join('');
   c.querySelectorAll('button').forEach(b => {
     b.addEventListener('click', () => {
       fetchWeather(parseFloat(b.dataset.lat), parseFloat(b.dataset.lon), b.dataset.name);
       closeDrawer();
-      closeSearch(); // ensure everything closes
+      closeSearch();
     });
   });
 }
@@ -824,22 +819,16 @@ function closeSearch() {
 }
 
 function renderThemePicker() {
-  const c = document.getElementById('themePicker');
-  c.innerHTML = THEMES.map(t => `
-    <button class="theme-circle ${state.settings.theme === t.id ? 'active' : ''}" data-theme="${t.id}" aria-label="Theme ${t.name}" title="${t.name}" style="background: linear-gradient(135deg, ${t.bg} 50%, ${t.accent} 50%);"></button>
-  `).join('');
-  c.querySelectorAll('.theme-circle').forEach(b => {
-    b.addEventListener('click', () => {
-      state.settings.theme = b.dataset.theme;
-      if (state.settings.highContrast) {
-        state.settings.highContrast = false;
-        document.getElementById('highContrast').checked = false;
-      }
-      saveSettings();
-      applySettings();
-      if (state.weather) render();
-    });
-  });
+  const c = document.getElementById('themeSelect');
+  c.innerHTML = THEMES.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
+  c.value = state.settings.theme;
+  c.onchange = (e) => {
+    state.settings.theme = e.target.value;
+    saveSettings();
+    applySettings();
+    if (state.weather) render();
+    if (state.weather) updateEffect();
+  };
 }
 
 let searchTimer;
@@ -857,7 +846,7 @@ document.getElementById('searchInput').addEventListener('input', e => {
         return;
       }
       res.innerHTML = d.results.map(r => `
-        <button class="w-full text-left p-3 rounded-xl border" style="border-color: var(--border); background: var(--bg-elev);" data-lat="${r.latitude}" data-lon="${r.longitude}" data-name="${r.name}${r.country ? ', ' + r.country_code : ''}">
+        <button class="w-full text-left p-3 rounded-xl border" style="border-color: var(--border); background: var(--cream-deep);" data-lat="${r.latitude}" data-lon="${r.longitude}" data-name="${r.name}${r.country ? ', ' + r.country_code : ''}">
           <div class="font-medium text-sm">${r.name}</div>
           <div class="text-xs opacity-60">${[r.admin1, r.country].filter(Boolean).join(', ')}</div>
         </button>
@@ -870,7 +859,7 @@ document.getElementById('searchInput').addEventListener('input', e => {
           fetchWeather(lat, lon, name);
           saveCurrentPlace(lat, lon, name);
           closeSearch();
-          closeDrawer(); // ensure everything closes
+          closeDrawer();
         });
       });
     } catch (err) { console.error(err); }
@@ -899,6 +888,261 @@ function useGeolocation() {
   );
 }
 
+/* ============================================================
+   Generative Melodic Loop (Web Audio API)
+   ============================================================ */
+let audioCtx = null;
+let masterGain = null;
+let isPlaying = false;
+let schedulerId = null;
+let nextNoteTime = 0;
+let currentNote = 0;
+
+const melody = [
+  { f: 261.63, d: 2 }, { f: 329.63, d: 2 }, { f: 392.00, d: 2 }, { f: 440.00, d: 2 },
+  { f: 523.25, d: 2 }, { f: 440.00, d: 2 }, { f: 392.00, d: 2 }, { f: 329.63, d: 4 }
+];
+
+function initAudio() {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  masterGain = audioCtx.createGain();
+  masterGain.gain.value = 0;
+  masterGain.connect(audioCtx.destination);
+}
+
+function scheduleNote(noteIndex, time) {
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = 'sine';
+  osc.frequency.value = melody[noteIndex].f;
+  const dur = melody[noteIndex].d;
+  gain.gain.setValueAtTime(0, time);
+  gain.gain.linearRampToValueAtTime(0.2, time + 0.1);
+  gain.gain.setValueAtTime(0.2, time + dur - 0.5);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + dur);
+  osc.connect(gain);
+  gain.connect(masterGain);
+  osc.start(time);
+  osc.stop(time + dur);
+}
+
+function schedulerLoop() {
+  while (nextNoteTime < audioCtx.currentTime + 1) {
+    scheduleNote(currentNote, nextNoteTime);
+    nextNoteTime += melody[currentNote].d;
+    currentNote = (currentNote + 1) % melody.length;
+  }
+  schedulerId = setTimeout(schedulerLoop, 25);
+}
+
+function toggleAudio() {
+  if (!audioCtx) initAudio();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  isPlaying = !isPlaying;
+  if (isPlaying) {
+    masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+    masterGain.gain.setValueAtTime(masterGain.gain.value, audioCtx.currentTime);
+    masterGain.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.5);
+    currentNote = 0;
+    nextNoteTime = audioCtx.currentTime + 0.1;
+    schedulerLoop();
+  } else {
+    masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+    masterGain.gain.setValueAtTime(masterGain.gain.value, audioCtx.currentTime);
+    masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+    clearTimeout(schedulerId);
+  }
+  document.getElementById('audioOffIcon').style.display = isPlaying ? 'none' : 'block';
+  document.getElementById('audioOnIcon').style.display = isPlaying ? 'block' : 'none';
+  showToast(isPlaying ? 'Music on' : 'Music off');
+}
+
+/* ============================================================
+   Weather & Seasonal FX Canvas
+   ============================================================ */
+const fxCanvas = document.getElementById('fxCanvas');
+const fxCtx = fxCanvas.getContext('2d');
+let particles = [];
+let effectType = 'none';
+let animationId = null;
+
+function resizeCanvas() {
+  fxCanvas.width = window.innerWidth;
+  fxCanvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+function createParticle(type) {
+  const p = {
+    x: Math.random() * fxCanvas.width,
+    y: Math.random() * fxCanvas.height,
+    type: type
+  };
+  switch (type) {
+    case 'rain':
+      p.vy = 12 + Math.random() * 12;
+      p.vx = -2 - Math.random() * 2;
+      p.len = 15 + Math.random() * 25;
+      p.alpha = 0.2 + Math.random() * 0.3;
+      break;
+    case 'snow':
+      p.vy = 1 + Math.random() * 2;
+      p.vx = Math.random() - 0.5;
+      p.r = 2 + Math.random() * 3;
+      p.alpha = 0.5 + Math.random() * 0.5;
+      p.sway = Math.random() * Math.PI * 2;
+      break;
+    case 'fog':
+      p.r = 150 + Math.random() * 150;
+      p.vx = 0.2 + Math.random() * 0.3;
+      p.alpha = 0.04;
+      p.y = Math.random() * fxCanvas.height;
+      break;
+    case 'petal':
+      p.vy = 1 + Math.random() * 1.5;
+      p.vx = Math.random() - 0.5;
+      p.r = 4 + Math.random() * 4;
+      p.rot = Math.random() * Math.PI * 2;
+      p.vRot = (Math.random() - 0.5) * 0.05;
+      break;
+    case 'leaf':
+      p.vy = 1 + Math.random() * 2;
+      p.vx = Math.random() - 0.5;
+      p.r = 5 + Math.random() * 5;
+      p.rot = Math.random() * Math.PI * 2;
+      p.vRot = (Math.random() - 0.5) * 0.05;
+      break;
+    case 'dust':
+      p.vy = -0.5 - Math.random() * 0.5;
+      p.vx = (Math.random() - 0.5) * 0.5;
+      p.r = 1 + Math.random() * 2;
+      p.alpha = 0.2 + Math.random() * 0.3;
+      break;
+  }
+  return p;
+}
+
+function setEffect(type) {
+  if (effectType === type) return;
+  effectType = type;
+  particles = [];
+  
+  if (state.settings.reduceMotion || type === 'none') {
+    if (animationId) cancelAnimationFrame(animationId);
+    fxCtx.clearRect(0, 0, fxCanvas.width, fxCanvas.height);
+    return;
+  }
+
+  const counts = { 'rain': 120, 'snow': 80, 'fog': 5, 'petal': 25, 'leaf': 20, 'dust': 40, 'lightsnow': 30 };
+  const count = counts[type] || 0;
+  
+  for (let i = 0; i < count; i++) {
+    particles.push(createParticle(type));
+  }
+  
+  if (animationId) cancelAnimationFrame(animationId);
+  animate();
+}
+
+function updateEffect() {
+  if (!state.weather) return;
+  const resolvedTheme = resolveTheme(state.settings.theme);
+  const code = state.weather.current.weather_code;
+  let effect = 'none';
+  
+  // Weather overrides seasonal
+  if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82) || (code >= 95 && code <= 99)) {
+    effect = 'rain';
+  } else if (code >= 71 && code <= 77 || code === 85 || code === 86) {
+    effect = 'snow';
+  } else if (code === 45 || code === 48) {
+    effect = 'fog';
+  } else {
+    // Seasonal ambient effects
+    if (resolvedTheme === 'spring') effect = 'petal';
+    else if (resolvedTheme === 'summer') effect = 'dust';
+    else if (resolvedTheme === 'autumn') effect = 'leaf';
+    else if (resolvedTheme === 'winter') effect = 'lightsnow';
+    else effect = 'dust'; // Fallback for standard themes
+  }
+  setEffect(effect);
+}
+
+function animate() {
+  fxCtx.clearRect(0, 0, fxCanvas.width, fxCanvas.height);
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    
+    // Update logic
+    if (p.type === 'rain') {
+      if (p.y > fxCanvas.height) { p.y = -p.len; p.x = Math.random() * fxCanvas.width; }
+    } else if (p.type === 'snow' || p.type === 'lightsnow') {
+      p.sway += 0.02;
+      p.x += Math.sin(p.sway) * 0.5;
+      if (p.y > fxCanvas.height) { p.y = -5; p.x = Math.random() * fxCanvas.width; }
+      if (p.x < 0) p.x = fxCanvas.width;
+      if (p.x > fxCanvas.width) p.x = 0;
+    } else if (p.type === 'fog') {
+      if (p.x > fxCanvas.width + p.r) p.x = -p.r;
+    } else if (p.type === 'petal' || p.type === 'leaf') {
+      p.rot += p.vRot;
+      p.x += Math.sin(p.y * 0.01) * 0.5;
+      if (p.y > fxCanvas.height) { p.y = -10; p.x = Math.random() * fxCanvas.width; }
+    } else if (p.type === 'dust') {
+      if (p.y < 0) { p.y = fxCanvas.height + 5; p.x = Math.random() * fxCanvas.width; }
+    }
+
+    // Draw logic
+    if (p.type === 'rain') {
+      fxCtx.strokeStyle = `rgba(174, 194, 224, ${p.alpha})`;
+      fxCtx.lineWidth = 1;
+      fxCtx.beginPath();
+      fxCtx.moveTo(p.x, p.y);
+      fxCtx.lineTo(p.x + p.vx, p.y + p.len);
+      fxCtx.stroke();
+    } else if (p.type === 'snow' || p.type === 'lightsnow') {
+      fxCtx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+      fxCtx.beginPath();
+      fxCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      fxCtx.fill();
+    } else if (p.type === 'fog') {
+      const grd = fxCtx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      grd.addColorStop(0, `rgba(200, 200, 200, ${p.alpha})`);
+      grd.addColorStop(1, 'rgba(200, 200, 200, 0)');
+      fxCtx.fillStyle = grd;
+      fxCtx.beginPath();
+      fxCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      fxCtx.fill();
+    } else if (p.type === 'petal') {
+      fxCtx.save();
+      fxCtx.translate(p.x, p.y);
+      fxCtx.rotate(p.rot);
+      fxCtx.fillStyle = `rgba(255, 183, 197, 0.8)`;
+      fxCtx.beginPath();
+      fxCtx.ellipse(0, 0, p.r, p.r * 0.5, 0, 0, Math.PI * 2);
+      fxCtx.fill();
+      fxCtx.restore();
+    } else if (p.type === 'leaf') {
+      fxCtx.save();
+      fxCtx.translate(p.x, p.y);
+      fxCtx.rotate(p.rot);
+      fxCtx.fillStyle = `rgba(197, 99, 46, 0.8)`;
+      fxCtx.beginPath();
+      fxCtx.ellipse(0, 0, p.r, p.r * 0.4, 0, 0, Math.PI * 2);
+      fxCtx.fill();
+      fxCtx.restore();
+    } else if (p.type === 'dust') {
+      fxCtx.fillStyle = `rgba(255, 223, 128, ${p.alpha})`;
+      fxCtx.beginPath();
+      fxCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      fxCtx.fill();
+    }
+  });
+  animationId = requestAnimationFrame(animate);
+}
+
 // Event wiring
 document.getElementById('searchBtn').addEventListener('click', openSearch);
 document.getElementById('closeSearch').addEventListener('click', closeSearch);
@@ -908,6 +1152,8 @@ document.getElementById('useLocationBtn').addEventListener('click', () => { clos
 document.getElementById('settingsBtn').addEventListener('click', openDrawer);
 document.getElementById('closeSettings').addEventListener('click', closeDrawer);
 document.getElementById('scrim').addEventListener('click', closeDrawer);
+
+document.getElementById('audioBtn').addEventListener('click', toggleAudio);
 
 document.getElementById('refreshBtn').addEventListener('click', () => {
   const icon = document.getElementById('refreshIcon');
@@ -935,9 +1181,18 @@ bind('showPoem', 'showPoem');
 bind('showHourly', 'showHourly');
 bind('showDaily', 'showDaily');
 bind('showDetails', 'showDetails');
-bind('reduceMotion', 'reduceMotion');
-bind('highContrast', 'highContrast');
 bind('largeTargets', 'largeTargets');
+
+document.getElementById('reduceMotion').addEventListener('change', e => {
+  state.settings.reduceMotion = e.target.checked;
+  saveSettings(); applySettings();
+  if (state.settings.reduceMotion) {
+    if (animationId) cancelAnimationFrame(animationId);
+    fxCtx.clearRect(0, 0, fxCanvas.width, fxCanvas.height);
+  } else {
+    updateEffect();
+  }
+});
 
 document.getElementById('textScale').addEventListener('input', e => {
   state.settings.textScale = parseInt(e.target.value);
@@ -949,6 +1204,7 @@ document.getElementById('resetBtn').addEventListener('click', () => {
   state.settings = { ...DEFAULTS, savedPlaces: state.settings.savedPlaces };
   saveSettings(); applySettings();
   if (state.weather) render();
+  if (state.weather) updateEffect();
   showToast('Reset to defaults');
 });
 
