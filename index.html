@@ -321,7 +321,7 @@
 <!-- Top bar -->
 <header class="top-bar">
   <div class="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between gap-2">
-    <button id="searchBtn" class="btn btn-icon flex-shrink-0" aria-label="Search location">
+    <button type="button" id="searchBtn" class="btn btn-icon flex-shrink-0" aria-label="Search location">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
     </button>
     <div class="flex items-center gap-2 flex-shrink-0">
@@ -333,14 +333,14 @@
       <h1 class="display text-lg tracking-[0.15em] font-medium uppercase hidden sm:block">Stillpoint</h1>
     </div>
     <div class="flex gap-1.5 flex-shrink-0">
-      <button id="audioBtn" class="btn btn-icon" aria-label="Toggle ambient theme tune">
+      <button type="button" id="audioBtn" class="btn btn-icon" aria-label="Toggle ambient theme tune">
         <svg id="audioOffIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
         <svg id="audioOnIcon" style="display:none" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
       </button>
-      <button id="refreshBtn" class="btn btn-icon" aria-label="Refresh weather">
+      <button type="button" id="refreshBtn" class="btn btn-icon" aria-label="Refresh weather">
         <svg id="refreshIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
       </button>
-      <button id="settingsBtn" class="btn btn-icon" aria-label="Open settings">
+      <button type="button" id="settingsBtn" class="btn btn-icon" aria-label="Open settings">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       </button>
     </div>
@@ -390,6 +390,7 @@
 
   <footer class="text-center text-xs opacity-50 mt-12 mb-4">
     <p>Data by Open-Meteo · Stillpoint · <span id="lastUpdated">—</span></p>
+    <p class="mt-2 opacity-80 font-medium tracking-wide">Made by Lee Williams</p>
   </footer>
 </main>
 
@@ -399,7 +400,7 @@
   <div class="p-5 pt-6" style="padding-top: max(1.5rem, env(safe-area-inset-top));">
     <div class="flex items-center justify-between mb-8">
       <h2 class="display text-2xl font-medium">Settings</h2>
-      <button id="closeSettings" class="btn btn-icon" aria-label="Close settings">
+      <button type="button" id="closeSettings" class="btn btn-icon" aria-label="Close settings">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
     </div>
@@ -492,7 +493,7 @@
       <div id="savedPlaces" class="space-y-2"></div>
     </section>
 
-    <button id="resetBtn" class="btn w-full justify-center">Reset to defaults</button>
+    <button type="button" id="resetBtn" class="btn w-full justify-center">Reset to defaults</button>
   </div>
 </aside>
 
@@ -502,11 +503,11 @@
   <div class="p-5">
     <div class="flex items-center gap-2 mb-4">
       <input type="text" id="searchInput" placeholder="Search city or place…" class="flex-1 bg-transparent border-b py-2 outline-none text-lg" style="border-color: var(--border)" autocomplete="off" aria-label="Search query">
-      <button id="closeSearch" class="btn btn-icon" aria-label="Close search">
+      <button type="button" id="closeSearch" class="btn btn-icon" aria-label="Close search">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
     </div>
-    <button id="useLocationBtn" class="btn w-full justify-center mb-3">
+    <button type="button" id="useLocationBtn" class="btn w-full justify-center mb-3">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M22 12h-3M5 12H2"/></svg>
       Use my current location
     </button>
@@ -622,7 +623,18 @@ function getAudioVariation() {
 }
 
 function toggleAudio() {
+  // Initialize audio ONLY on the exact button click 
+  // to satisfy mobile browser security rules
+  if (!stillpointAudio.ctx) {
+    stillpointAudio.init();
+  }
+  
+  if (stillpointAudio.ctx.state === 'suspended') {
+    stillpointAudio.ctx.resume();
+  }
+
   isPlaying = !isPlaying;
+  
   if (isPlaying) {
     stillpointAudio.play(getAudioVariation());
     document.getElementById('audioOffIcon').style.display = 'none';
@@ -908,7 +920,7 @@ function renderSavedPlaces() {
     return;
   }
   c.innerHTML = state.settings.savedPlaces.map(p => `
-    <button class="w-full text-left p-3 rounded-xl border flex justify-between items-center" style="border-color: var(--border); background: var(--cream-deep);" data-lat="${p.lat}" data-lon="${p.lon}" data-name="${p.name}">
+    <button type="button" class="w-full text-left p-3 rounded-xl border flex justify-between items-center" style="border-color: var(--border); background: var(--cream-deep);" data-lat="${p.lat}" data-lon="${p.lon}" data-name="${p.name}">
       <span class="text-sm truncate font-medium">${p.name}</span>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="flex-shrink-0"><path d="m9 18 6-6-6-6"/></svg>
     </button>
@@ -959,7 +971,7 @@ document.getElementById('searchInput').addEventListener('input', e => {
       const d = await r.json();
       if (!d.results || !d.results.length) { res.innerHTML = '<div class="opacity-60 p-3 text-sm">No matches found.</div>'; return; }
       res.innerHTML = d.results.map(r => `
-        <button class="w-full text-left p-3 rounded-xl border" style="border-color: var(--border); background: var(--cream-deep);" data-lat="${r.latitude}" data-lon="${r.longitude}" data-name="${r.name}${r.country ? ', ' + r.country_code : ''}">
+        <button type="button" class="w-full text-left p-3 rounded-xl border" style="border-color: var(--border); background: var(--cream-deep);" data-lat="${r.latitude}" data-lon="${r.longitude}" data-name="${r.name}${r.country ? ', ' + r.country_code : ''}">
           <div class="font-medium text-sm">${r.name}</div>
           <div class="text-xs opacity-60">${[r.admin1, r.country].filter(Boolean).join(', ')}</div>
         </button>
