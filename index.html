@@ -39,7 +39,7 @@
   [data-theme="winter"] {--cream:#EEF2F5;--cream-deep:#DCE3E8;--bark:#1B2733;--bark-soft:#4A5A6A;--sky:#DCE3E8;--sky-deep:#C5D0D8;--card:#FFFFFF;--border:#B0BFC8;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#6B8CAE;--honey:#A2B2C3;--rose:#A8455C;--sage:#8CB59F;--shadow:0 1px 2px rgba(27,39,51,0.04), 0 12px 40px -12px rgba(27,39,51,0.12);--shadow-hover:0 2px 4px rgba(27,39,51,0.04), 0 16px 50px -12px rgba(27,39,51,0.18)}
 
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
+  html, body { margin: 0; padding: 0; overscroll-behavior: none; /* Prevents mobile browser pull-to-refresh */ }
   body {
     font-family: var(--font-body);
     background: var(--cream);
@@ -266,6 +266,7 @@
     overflow: hidden; display: flex; align-items: center; justify-content: center;
     color: var(--bark-soft); font-size: 0.85rem; z-index: 50;
     transition: height 0.2s ease;
+    pointer-events: none; /* Prevents intercepting taps on the header */
   }
 
   /* Daily Temp Range Bar - Dynamic Gradient */
@@ -623,8 +624,6 @@ function getAudioVariation() {
 }
 
 function toggleAudio() {
-  // Initialize audio ONLY on the exact button click 
-  // to satisfy mobile browser security rules
   if (!stillpointAudio.ctx) {
     stillpointAudio.init();
   }
@@ -926,7 +925,8 @@ function renderSavedPlaces() {
     </button>
   `).join('');
   c.querySelectorAll('button').forEach(b => {
-    b.addEventListener('click', () => {
+    b.addEventListener('click', (e) => {
+      e.preventDefault();
       fetchWeather(parseFloat(b.dataset.lat), parseFloat(b.dataset.lon), b.dataset.name);
       closeDrawer(); closeSearch();
     });
@@ -977,7 +977,8 @@ document.getElementById('searchInput').addEventListener('input', e => {
         </button>
       `).join('');
       res.querySelectorAll('button').forEach(b => {
-        b.addEventListener('click', () => {
+        b.addEventListener('click', (e) => {
+          e.preventDefault();
           const lat = parseFloat(b.dataset.lat); const lon = parseFloat(b.dataset.lon); const name = b.dataset.name;
           fetchWeather(lat, lon, name); saveCurrentPlace(lat, lon, name); closeSearch(); closeDrawer();
         });
@@ -1095,25 +1096,40 @@ function animate() {
   animationId = requestAnimationFrame(animate);
 }
 
+// Helper to prevent default on clicks
+function handleClick(id, fn) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      fn();
+    });
+  }
+}
+
 // Event wiring
-document.getElementById('searchBtn').addEventListener('click', openSearch);
-document.getElementById('closeSearch').addEventListener('click', closeSearch);
-document.getElementById('searchScrim').addEventListener('click', closeSearch);
-document.getElementById('useLocationBtn').addEventListener('click', () => { closeSearch(); useGeolocation(); });
-
-document.getElementById('settingsBtn').addEventListener('click', openDrawer);
-document.getElementById('closeSettings').addEventListener('click', closeDrawer);
-document.getElementById('scrim').addEventListener('click', closeDrawer);
-
-document.getElementById('audioBtn').addEventListener('click', toggleAudio);
-
-document.getElementById('refreshBtn').addEventListener('click', () => {
+handleClick('searchBtn', openSearch);
+handleClick('closeSearch', closeSearch);
+handleClick('searchScrim', closeSearch);
+handleClick('useLocationBtn', () => { closeSearch(); useGeolocation(); });
+handleClick('settingsBtn', openDrawer);
+handleClick('closeSettings', closeDrawer);
+handleClick('scrim', closeDrawer);
+handleClick('audioBtn', toggleAudio);
+handleClick('refreshBtn', () => {
   const icon = document.getElementById('refreshIcon');
   icon.style.transition = 'transform 0.6s ease';
   icon.style.transform = 'rotate(360deg)';
   setTimeout(() => { icon.style.transition = ''; icon.style.transform = ''; }, 600);
   if (state.location) fetchWeather(state.location.lat, state.location.lon, state.location.name);
   else useGeolocation();
+});
+handleClick('resetBtn', () => {
+  state.settings = { ...DEFAULTS, savedPlaces: state.settings.savedPlaces };
+  saveSettings(); applySettings();
+  if (state.weather) render();
+  if (state.weather) updateEffect();
+  showToast('Reset to defaults');
 });
 
 const bind = (id, key, render = false) => {
@@ -1150,14 +1166,6 @@ document.getElementById('textScale').addEventListener('input', e => {
   state.settings.textScale = parseInt(e.target.value);
   document.getElementById('textScaleValue').textContent = e.target.value + '%';
   saveSettings(); applySettings();
-});
-
-document.getElementById('resetBtn').addEventListener('click', () => {
-  state.settings = { ...DEFAULTS, savedPlaces: state.settings.savedPlaces };
-  saveSettings(); applySettings();
-  if (state.weather) render();
-  if (state.weather) updateEffect();
-  showToast('Reset to defaults');
 });
 
 document.addEventListener('keydown', e => {
