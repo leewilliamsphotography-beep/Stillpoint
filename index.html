@@ -11,7 +11,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   :root {
     --font-display: 'Fraunces', Georgia, serif;
@@ -21,22 +23,22 @@
   }
 
   /* User Provided Themes */
-  [data-theme="light"] {--cream:#FAFAF8;--cream-deep:#F0EDE8;--bark:#1A2C38;--bark-soft:#5A6B75;--sky:#EFF2F4;--sky-deep:#DCE2E5;--card:#FFFFFF;--border:#E5E2DD;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 10px 40px -10px rgba(26, 44, 56, 0.06);--shadow-hover:0 20px 50px -15px rgba(26, 44, 56, 0.12)}
-  [data-theme="dark"] {--cream:#111418;--cream-deep:#1B2026;--bark:#E0E6EA;--bark-soft:#94A3B8;--sky:#1B2026;--sky-deep:#111418;--card:#1B2026;--border:#2D333B;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(0,0,0,.2);--shadow-hover:0 12px 30px -8px rgba(0,0,0,.4)}
-  [data-theme="warm"] {--cream:#FAF5EB;--cream-deep:#EDE3CC;--bark:#3B2E25;--bark-soft:#6B5544;--sky:#EFE5D2;--sky-deep:#E5D8BD;--card:#FFFAF0;--border:#E0D2B6;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(59,46,37,.08);--shadow-hover:0 12px 30px -8px rgba(59,46,37,.12)}
-  [data-theme="soft"] {--cream:#F8FAFC;--cream-deep:#E2E8F0;--bark:#1E293B;--bark-soft:#475569;--sky:#EFF6FF;--sky-deep:#DBEAFE;--card:#FFF;--border:#CBD5E1;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(30,41,59,.05);--shadow-hover:0 12px 30px -8px rgba(30,41,59,.1)}
+  [data-theme="light"] {--cream:#FAFAF8;--cream-deep:#F0EDE8;--bark:#1A2C38;--bark-soft:#5A6B75;--sky:#EFF2F4;--sky-deep:#DCE2E5;--card:#FFFFFF;--border:#E5E2DD;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 1px 2px rgba(0,0,0,0.04), 0 8px 30px -10px rgba(26, 44, 56, 0.08);--shadow-hover:0 2px 4px rgba(0,0,0,0.04), 0 12px 40px -10px rgba(26, 44, 56, 0.15)}
+  [data-theme="dark"] {--cream:#111418;--cream-deep:#1B2026;--bark:#E0E6EA;--bark-soft:#94A3B8;--sky:#1B2026;--sky-deep:#111418;--card:#1B2026;--border:#2D333B;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 1px 2px rgba(0,0,0,0.2), 0 8px 30px -10px rgba(0,0,0,0.4);--shadow-hover:0 2px 4px rgba(0,0,0,0.2), 0 12px 40px -10px rgba(0,0,0,0.5)}
+  [data-theme="warm"] {--cream:#FAF5EB;--cream-deep:#EDE3CC;--bark:#3B2E25;--bark-soft:#6B5544;--sky:#EFE5D2;--sky-deep:#E5D8BD;--card:#FFFAF0;--border:#E0D2B6;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 1px 2px rgba(59,46,37,0.04), 0 8px 30px -10px rgba(59,46,37,0.12);--shadow-hover:0 2px 4px rgba(59,46,37,0.04), 0 12px 40px -10px rgba(59,46,37,0.18)}
+  [data-theme="soft"] {--cream:#F8FAFC;--cream-deep:#E2E8F0;--bark:#1E293B;--bark-soft:#475569;--sky:#EFF6FF;--sky-deep:#DBEAFE;--card:#FFF;--border:#CBD5E1;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 1px 2px rgba(30,41,59,0.03), 0 8px 30px -10px rgba(30,41,59,0.08);--shadow-hover:0 2px 4px rgba(30,41,59,0.03), 0 12px 40px -10px rgba(30,41,59,0.12)}
   [data-theme="high-contrast"] {--cream:#000;--cream-deep:#000;--bark:#FFF;--bark-soft:#FFF;--sky:#000;--sky-deep:#000;--card:#000;--border:#FFF;--teal:#FFFF00;--teal-deep:#FFFF00;--terracotta:#00FF00;--honey:#FFFF00;--rose:#FF00FF;--sage:#00FFFF;--shadow:none;--shadow-hover:none}
-  [data-theme="ocean"] {--cream:#04101a;--cream-deep:#0a1c2a;--bark:#e6f0fa;--bark-soft:#8da3b8;--sky:#0a1c2a;--sky-deep:#04101a;--card:#0f2438;--border:#1c3a4f;--teal:#00d4aa;--teal-deep:#00b894;--terracotta:#facc15;--honey:#00a8ff;--rose:#00d4aa;--sage:#1c3a4f;--shadow:0 4px 20px -4px rgba(0,0,0,.4);--shadow-hover:0 12px 30px -8px rgba(0,0,0,.6)}
-  [data-theme="ember"] {--cream:#120505;--cream-deep:#1e0d0d;--bark:#fbeaea;--bark-soft:#b8a0a0;--sky:#1e0d0d;--sky-deep:#120505;--card:#2a1414;--border:#4a2424;--teal:#ff5c5c;--teal-deep:#ff3838;--terracotta:#ff9d5c;--honey:#ffcc5c;--rose:#ff5c5c;--sage:#4a2424;--shadow:0 4px 20px -4px rgba(0,0,0,.4);--shadow-hover:0 12px 30px -8px rgba(0,0,0,.6)}
-  [data-theme="cyber"] {--cream:#050a08;--cream-deep:#0a1410;--bark:#e6f0ea;--bark-soft:#8da3b8;--sky:#0a1410;--sky-deep:#050a08;--card:#0f1f18;--border:#1c3a2c;--teal:#00ff88;--teal-deep:#00cc66;--terracotta:#00ffcc;--honey:#facc15;--rose:#00ff88;--sage:#1c3a2c;--shadow:0 4px 20px -4px rgba(0,0,0,.4);--shadow-hover:0 12px 30px -8px rgba(0,0,0,.6)}
-  [data-theme="rose"] {--cream:#120a10;--cream-deep:#1e0d18;--bark:#fbe6f0;--bark-soft:#b8a0b0;--sky:#1e0d18;--sky-deep:#120a10;--card:#2a1422;--border:#4a2438;--teal:#ff4f8b;--teal-deep:#e0306a;--terracotta:#ff8fab;--honey:#a78bfa;--rose:#ff4f8b;--sage:#4a2438;--shadow:0 4px 20px -4px rgba(0,0,0,.4);--shadow-hover:0 12px 30px -8px rgba(0,0,0,.6)}
-  [data-theme="sand"] {--cream:#faf3e8;--cream-deep:#f5ede0;--bark:#2e2418;--bark-soft:#88785a;--sky:#f5ede0;--sky-deep:#ebe0cd;--card:#ffffff;--border:#e0d4bc;--teal:#d97706;--teal-deep:#b45309;--terracotta:#0284c7;--honey:#65a30d;--rose:#d97706;--sage:#88785a;--shadow:0 4px 20px -4px rgba(46,36,24,.05);--shadow-hover:0 12px 30px -8px rgba(46,36,24,.1)}
+  [data-theme="ocean"] {--cream:#04101a;--cream-deep:#0a1c2a;--bark:#e6f0fa;--bark-soft:#8da3b8;--sky:#0a1c2a;--sky-deep:#04101a;--card:#0f2438;--border:#1c3a4f;--teal:#00d4aa;--teal-deep:#00b894;--terracotta:#facc15;--honey:#00a8ff;--rose:#00d4aa;--sage:#1c3a4f;--shadow:0 1px 2px rgba(0,0,0,0.3), 0 8px 30px -10px rgba(0,0,0,0.5);--shadow-hover:0 2px 4px rgba(0,0,0,0.3), 0 12px 40px -10px rgba(0,0,0,0.6)}
+  [data-theme="ember"] {--cream:#120505;--cream-deep:#1e0d0d;--bark:#fbeaea;--bark-soft:#b8a0a0;--sky:#1e0d0d;--sky-deep:#120505;--card:#2a1414;--border:#4a2424;--teal:#ff5c5c;--teal-deep:#ff3838;--terracotta:#ff9d5c;--honey:#ffcc5c;--rose:#ff5c5c;--sage:#4a2424;--shadow:0 1px 2px rgba(0,0,0,0.3), 0 8px 30px -10px rgba(0,0,0,0.5);--shadow-hover:0 2px 4px rgba(0,0,0,0.3), 0 12px 40px -10px rgba(0,0,0,0.6)}
+  [data-theme="cyber"] {--cream:#050a08;--cream-deep:#0a1410;--bark:#e6f0ea;--bark-soft:#8da3b8;--sky:#0a1410;--sky-deep:#050a08;--card:#0f1f18;--border:#1c3a2c;--teal:#00ff88;--teal-deep:#00cc66;--terracotta:#00ffcc;--honey:#facc15;--rose:#00ff88;--sage:#1c3a2c;--shadow:0 1px 2px rgba(0,0,0,0.3), 0 8px 30px -10px rgba(0,0,0,0.5);--shadow-hover:0 2px 4px rgba(0,0,0,0.3), 0 12px 40px -10px rgba(0,0,0,0.6)}
+  [data-theme="rose"] {--cream:#120a10;--cream-deep:#1e0d18;--bark:#fbe6f0;--bark-soft:#b8a0b0;--sky:#1e0d18;--sky-deep:#120a10;--card:#2a1422;--border:#4a2438;--teal:#ff4f8b;--teal-deep:#e0306a;--terracotta:#ff8fab;--honey:#a78bfa;--rose:#ff4f8b;--sage:#4a2438;--shadow:0 1px 2px rgba(0,0,0,0.3), 0 8px 30px -10px rgba(0,0,0,0.5);--shadow-hover:0 2px 4px rgba(0,0,0,0.3), 0 12px 40px -10px rgba(0,0,0,0.6)}
+  [data-theme="sand"] {--cream:#faf3e8;--cream-deep:#f5ede0;--bark:#2e2418;--bark-soft:#88785a;--sky:#f5ede0;--sky-deep:#ebe0cd;--card:#ffffff;--border:#e0d4bc;--teal:#d97706;--teal-deep:#b45309;--terracotta:#0284c7;--honey:#65a30d;--rose:#d97706;--sage:#88785a;--shadow:0 1px 2px rgba(46,36,24,0.03), 0 8px 30px -10px rgba(46,36,24,0.08);--shadow-hover:0 2px 4px rgba(46,36,24,0.03), 0 12px 40px -10px rgba(46,36,24,0.12)}
 
   /* Hidden Seasonal Themes (Triggered by Auto) */
-  [data-theme="spring"] {--cream:#FDF6F0;--cream-deep:#F9E8E4;--bark:#4A3B3A;--bark-soft:#7A6A68;--sky:#F9E8E4;--sky-deep:#F0D8D2;--card:#FFFFFF;--border:#E8D5D0;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#E8A87C;--honey:#D4A373;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(74,59,58,.08);--shadow-hover:0 12px 30px -8px rgba(74,59,58,.12)}
-  [data-theme="summer"] {--cream:#EAF6F8;--cream-deep:#D6EBF0;--bark:#1A3C48;--bark-soft:#456A78;--sky:#D6EBF0;--sky-deep:#C0DDE6;--card:#FFFFFF;--border:#B0D0DD;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#FFB347;--honey:#FFD166;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(26,60,72,.08);--shadow-hover:0 12px 30px -8px rgba(26,60,72,.12)}
-  [data-theme="autumn"] {--cream:#FBF3E4;--cream-deep:#F0E3CC;--bark:#3A2218;--bark-soft:#6A4A3A;--sky:#F0E3CC;--sky-deep:#E8D5B6;--card:#FFFFFF;--border:#D8C5A6;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(58,34,24,.08);--shadow-hover:0 12px 30px -8px rgba(58,34,24,.12)}
-  [data-theme="winter"] {--cream:#EEF2F5;--cream-deep:#DCE3E8;--bark:#1B2733;--bark-soft:#4A5A6A;--sky:#DCE3E8;--sky-deep:#C5D0D8;--card:#FFFFFF;--border:#B0BFC8;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#6B8CAE;--honey:#A2B2C3;--rose:#A8455C;--sage:#8CB59F;--shadow:0 4px 20px -4px rgba(27,39,51,.08);--shadow-hover:0 12px 30px -8px rgba(27,39,51,.12)}
+  [data-theme="spring"] {--cream:#FDF6F0;--cream-deep:#F9E8E4;--bark:#4A3B3A;--bark-soft:#7A6A68;--sky:#F9E8E4;--sky-deep:#F0D8D2;--card:#FFFFFF;--border:#E8D5D0;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#E8A87C;--honey:#D4A373;--rose:#A8455C;--sage:#8CB59F;--shadow:0 1px 2px rgba(74,59,58,0.04), 0 8px 30px -10px rgba(74,59,58,0.12);--shadow-hover:0 2px 4px rgba(74,59,58,0.04), 0 12px 40px -10px rgba(74,59,58,0.18)}
+  [data-theme="summer"] {--cream:#EAF6F8;--cream-deep:#D6EBF0;--bark:#1A3C48;--bark-soft:#456A78;--sky:#D6EBF0;--sky-deep:#C0DDE6;--card:#FFFFFF;--border:#B0D0DD;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#FFB347;--honey:#FFD166;--rose:#A8455C;--sage:#8CB59F;--shadow:0 1px 2px rgba(26,60,72,0.04), 0 8px 30px -10px rgba(26,60,72,0.12);--shadow-hover:0 2px 4px rgba(26,60,72,0.04), 0 12px 40px -10px rgba(26,60,72,0.18)}
+  [data-theme="autumn"] {--cream:#FBF3E4;--cream-deep:#F0E3CC;--bark:#3A2218;--bark-soft:#6A4A3A;--sky:#F0E3CC;--sky-deep:#E8D5B6;--card:#FFFFFF;--border:#D8C5A6;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#C5632E;--honey:#B8862A;--rose:#A8455C;--sage:#8CB59F;--shadow:0 1px 2px rgba(58,34,24,0.04), 0 8px 30px -10px rgba(58,34,24,0.12);--shadow-hover:0 2px 4px rgba(58,34,24,0.04), 0 12px 40px -10px rgba(58,34,24,0.18)}
+  [data-theme="winter"] {--cream:#EEF2F5;--cream-deep:#DCE3E8;--bark:#1B2733;--bark-soft:#4A5A6A;--sky:#DCE3E8;--sky-deep:#C5D0D8;--card:#FFFFFF;--border:#B0BFC8;--teal:#0E8C6C;--teal-deep:#097156;--terracotta:#6B8CAE;--honey:#A2B2C3;--rose:#A8455C;--sage:#8CB59F;--shadow:0 1px 2px rgba(27,39,51,0.04), 0 8px 30px -10px rgba(27,39,51,0.12);--shadow-hover:0 2px 4px rgba(27,39,51,0.04), 0 12px 40px -10px rgba(27,39,51,0.18)}
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -50,12 +52,12 @@
     transition: background-color 0.6s ease, color 0.6s ease;
     overflow-x: hidden;
   }
-  .display { font-family: var(--font-display); font-feature-settings: "ss01"; }
+  .display { font-family: var(--font-display); font-feature-settings: "ss01"; letter-spacing: -0.02em; }
 
   /* Atmospheric background */
   .atmosphere { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
   .atmosphere::before, .atmosphere::after {
-    content: ''; position: absolute; border-radius: 50%; filter: blur(80px);
+    content: ''; position: absolute; border-radius: 50%; filter: blur(100px);
     animation: drift 30s ease-in-out infinite;
   }
   .atmosphere::before {
@@ -81,21 +83,21 @@
   .card {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: calc(1.25rem * var(--density));
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    border-radius: 24px;
+    padding: calc(1.5rem * var(--density));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     box-shadow: var(--shadow);
   }
   .card:hover { 
-    transform: translateY(-2px); 
+    transform: translateY(-3px); 
     box-shadow: var(--shadow-hover); 
     border-color: var(--terracotta);
   }
   .card-tight { 
-    padding: calc(0.85rem * var(--density)); 
-    border-radius: 14px; 
+    padding: calc(1rem * var(--density)); 
+    border-radius: 20px; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -143,7 +145,7 @@
     transform: translate(-50%, -150%);
     width: calc(100% - 2rem); max-width: 460px;
     background: var(--cream); border: 1px solid var(--border);
-    border-radius: 18px; z-index: 110;
+    border-radius: 24px; z-index: 110;
     transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
     opacity: 0; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
     max-height: 70vh; overflow-y: auto;
@@ -152,13 +154,13 @@
 
   /* Hourly strip */
   .hourly-track {
-    display: flex; gap: 0.5rem; overflow-x: auto;
-    scroll-snap-type: x mandatory; padding: 0.25rem;
+    display: flex; gap: 0.75rem; overflow-x: auto;
+    scroll-snap-type: x mandatory; padding: 0.5rem 0.25rem;
     margin: 0 -0.25rem; scrollbar-width: thin; scrollbar-color: var(--terracotta) transparent;
   }
   .hourly-track::-webkit-scrollbar { height: 4px; }
   .hourly-track::-webkit-scrollbar-thumb { background: var(--terracotta); border-radius: 2px; }
-  .hourly-track > * { flex: 0 0 auto; scroll-snap-align: start; min-width: 72px; }
+  .hourly-track > * { flex: 0 0 auto; scroll-snap-align: start; min-width: 80px; }
 
   /* Range slider */
   input[type="range"] {
@@ -262,11 +264,12 @@
     transition: height 0.2s ease;
   }
 
-  /* Daily range bar */
-  .range-bar { position: relative; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  /* Daily range bar - Professional Gradient */
+  .range-bar { position: relative; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
   .range-fill {
-    position: absolute; height: 100%; background: var(--terracotta); border-radius: 3px;
+    position: absolute; height: 100%; background: linear-gradient(90deg, #4A90E2 0%, #50E3C2 50%, #F5A623 100%); border-radius: 4px;
     transition: all 0.4s ease;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
   }
 
   body { scrollbar-width: thin; scrollbar-color: var(--terracotta) transparent; }
@@ -275,7 +278,10 @@
 
   .top-bar {
     position: sticky; top: 0; z-index: 40;
-    background: linear-gradient(to bottom, var(--cream) 70%, transparent);
+    background: color-mix(in srgb, var(--cream) 80%, transparent);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
     padding-top: env(safe-area-inset-top, 0);
   }
 
@@ -288,6 +294,29 @@
   .anim-temp {
     animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
+
+  /* Leaflet Map Customization */
+  #weatherMap { 
+    height: 280px; 
+    border-radius: 20px; 
+    border: 1px solid var(--border);
+    z-index: 10;
+  }
+  .leaflet-control-zoom {
+    border: 1px solid var(--border) !important;
+    background: var(--cream) !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+    box-shadow: var(--shadow) !important;
+  }
+  .leaflet-control-zoom a {
+    background: var(--cream) !important;
+    color: var(--bark) !important;
+    border-color: var(--border) !important;
+  }
+  .leaflet-control-zoom a:hover {
+    background: var(--cream-deep) !important;
+  }
 </style>
 </head>
 <body data-large-targets="true">
@@ -298,7 +327,7 @@
 <div class="atmosphere" aria-hidden="true"></div>
 <div class="ptr-hint" id="ptrHint">Release to refresh</div>
 
-<!-- Top bar (Fixed mobile layout to prevent overflow) -->
+<!-- Top bar -->
 <header class="top-bar">
   <div class="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between gap-2">
     <button id="searchBtn" class="btn btn-icon flex-shrink-0" aria-label="Search location">
@@ -328,8 +357,8 @@
 </header>
 
 <!-- Main -->
-<main id="main" class="relative z-10 max-w-2xl mx-auto px-5 pb-32">
-  <div class="flex justify-center mb-6 mt-4">
+<main id="main" class="relative z-10 max-w-2xl mx-auto px-5 pb-32 pt-8">
+  <div class="flex justify-center mb-6">
     <svg width="64" height="64" viewBox="0 0 1024 1024" aria-hidden="true">
       <circle cx="512" cy="512" r="320" fill="var(--terracotta)" opacity="0.15"/>
       <circle cx="512" cy="512" r="220" fill="var(--terracotta)" opacity="0.3"/>
@@ -338,38 +367,43 @@
   </div>
   
   <div class="text-center mb-8">
-    <p id="locationName" class="display text-base tracking-[0.2em] opacity-70">LOCATING…</p>
+    <p id="locationName" class="display text-2xl tracking-[0.1em] opacity-80 font-medium">LOCATING…</p>
     <p id="localTime" class="text-xs opacity-50 mt-1.5"></p>
   </div>
 
   <section aria-label="Current conditions" class="text-center mb-6" id="breathViz">
-    <div class="display text-7xl font-light tracking-tighter anim-temp" id="tempDisplay">—</div>
-    <div class="text-[10px] uppercase tracking-[0.25em] opacity-70 mt-2" id="conditionDisplay">—</div>
+    <div class="display text-8xl font-light tracking-tighter anim-temp" id="tempDisplay">—</div>
+    <div class="text-sm uppercase tracking-[0.2em] opacity-70 mt-2" id="conditionDisplay">—</div>
   </section>
 
-  <blockquote id="poemDisplay" class="display text-center italic text-lg leading-relaxed max-w-md mx-auto mb-10 opacity-85 px-2">
+  <blockquote id="poemDisplay" class="display text-center italic text-lg leading-relaxed max-w-md mx-auto mb-12 opacity-85 px-2">
     The sky holds its breath, waiting.
   </blockquote>
 
-  <section aria-label="Key metrics" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10" id="quickMetrics"></section>
+  <section aria-label="Key metrics" class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12" id="quickMetrics"></section>
 
-  <section class="mb-10" id="hourlySection" aria-labelledby="hourlyHeading">
-    <h2 id="hourlyHeading" class="text-[10px] uppercase tracking-[0.25em] opacity-60 mb-4">Next hours</h2>
+  <section class="mb-12" id="hourlySection" aria-labelledby="hourlyHeading">
+    <h2 id="hourlyHeading" class="text-xs uppercase tracking-[0.2em] opacity-60 mb-4 font-medium">Next hours</h2>
     <div class="hourly-track" id="hourlyTrack"></div>
   </section>
 
-  <section class="mb-10" id="dailySection" aria-labelledby="dailyHeading">
-    <h2 id="dailyHeading" class="text-[10px] uppercase tracking-[0.25em] opacity-60 mb-4">The week ahead</h2>
-    <div class="card" id="dailyList"></div>
+  <section class="mb-12" id="mapSection" aria-labelledby="mapHeading">
+    <h2 id="mapHeading" class="text-xs uppercase tracking-[0.2em] opacity-60 mb-4 font-medium">Precipitation Map</h2>
+    <div id="weatherMap"></div>
   </section>
 
-  <section class="mb-10" id="detailSection" aria-labelledby="detailHeading">
-    <h2 id="detailHeading" class="text-[10px] uppercase tracking-[0.25em] opacity-60 mb-4">Details</h2>
-    <div class="grid grid-cols-2 gap-3" id="detailList"></div>
+  <section class="mb-12" id="dailySection" aria-labelledby="dailyHeading">
+    <h2 id="dailyHeading" class="text-xs uppercase tracking-[0.2em] opacity-60 mb-4 font-medium">The week ahead</h2>
+    <div class="card !p-4 sm:!p-6" id="dailyList"></div>
+  </section>
+
+  <section class="mb-12" id="detailSection" aria-labelledby="detailHeading">
+    <h2 id="detailHeading" class="text-xs uppercase tracking-[0.2em] opacity-60 mb-4 font-medium">Details</h2>
+    <div class="grid grid-cols-2 gap-4" id="detailList"></div>
   </section>
 
   <footer class="text-center text-xs opacity-50 mt-12 mb-4">
-    <p>Data by Open-Meteo · Stillpoint · <span id="lastUpdated">—</span></p>
+    <p>Data by Open-Meteo · Map by OpenStreetMap & RainViewer · Stillpoint · <span id="lastUpdated">—</span></p>
   </footer>
 </main>
 
@@ -441,6 +475,10 @@
         <label class="flex items-center justify-between cursor-pointer">
           <span>Hourly forecast</span>
           <span class="switch"><input type="checkbox" id="showHourly" checked><span class="slider"></span></span>
+        </label>
+        <label class="flex items-center justify-between cursor-pointer">
+          <span>Precipitation map</span>
+          <span class="switch"><input type="checkbox" id="showMap" checked><span class="slider"></span></span>
         </label>
         <label class="flex items-center justify-between cursor-pointer">
           <span>Daily forecast</span>
@@ -701,22 +739,22 @@ function toggleAudio() {
    App State & Settings
    ============================================================ */
 const THEMES = [
-  { id: 'light', name: 'Light', bg: '#FAFAF8', accent: '#C5632E' },
-  { id: 'dark', name: 'Dark', bg: '#111418', accent: '#C5632E' },
-  { id: 'warm', name: 'Warm', bg: '#FAF5EB', accent: '#C5632E' },
-  { id: 'soft', name: 'Soft', bg: '#F8FAFC', accent: '#C5632E' },
-  { id: 'high-contrast', name: 'High Contrast', bg: '#000000', accent: '#00FF00' },
-  { id: 'ocean', name: 'Ocean', bg: '#04101a', accent: '#00d4aa' },
-  { id: 'ember', name: 'Ember', bg: '#120505', accent: '#ff5c5c' },
-  { id: 'cyber', name: 'Cyber', bg: '#050a08', accent: '#00ff88' },
-  { id: 'rose', name: 'Rose', bg: '#120a10', accent: '#ff4f8b' },
-  { id: 'sand', name: 'Sand', bg: '#faf3e8', accent: '#d97706' },
-  { id: 'seasonal', name: 'Seasonal (Auto)', bg: '#FAFAF8', accent: '#C5632E' }
+  { id: 'light', name: 'Light', bg: '#FAFAF8', accent: '#C5632E', isDark: false },
+  { id: 'dark', name: 'Dark', bg: '#111418', accent: '#C5632E', isDark: true },
+  { id: 'warm', name: 'Warm', bg: '#FAF5EB', accent: '#C5632E', isDark: false },
+  { id: 'soft', name: 'Soft', bg: '#F8FAFC', accent: '#C5632E', isDark: false },
+  { id: 'high-contrast', name: 'High Contrast', bg: '#000000', accent: '#00FF00', isDark: true },
+  { id: 'ocean', name: 'Ocean', bg: '#04101a', accent: '#00d4aa', isDark: true },
+  { id: 'ember', name: 'Ember', bg: '#120505', accent: '#ff5c5c', isDark: true },
+  { id: 'cyber', name: 'Cyber', bg: '#050a08', accent: '#00ff88', isDark: true },
+  { id: 'rose', name: 'Rose', bg: '#120a10', accent: '#ff4f8b', isDark: true },
+  { id: 'sand', name: 'Sand', bg: '#faf3e8', accent: '#d97706', isDark: false },
+  { id: 'seasonal', name: 'Seasonal (Auto)', bg: '#FAFAF8', accent: '#C5632E', isDark: false }
 ];
 
 const DEFAULTS = {
   theme: 'light', font: 'serif', tempUnit: 'c', windUnit: 'kmh', pressureUnit: 'hpa',
-  textScale: 100, density: 'comfortable', showPoem: true, showHourly: true,
+  textScale: 100, density: 'comfortable', showPoem: true, showHourly: true, showMap: true,
   showDaily: true, showDetails: true, reduceMotion: false, largeTargets: true, savedPlaces: []
 };
 
@@ -752,6 +790,7 @@ function applySettings() {
 
   document.getElementById('poemDisplay').style.display = state.settings.showPoem ? '' : 'none';
   document.getElementById('hourlySection').style.display = state.settings.showHourly ? '' : 'none';
+  document.getElementById('mapSection').style.display = state.settings.showMap ? '' : 'none';
   document.getElementById('dailySection').style.display = state.settings.showDaily ? '' : 'none';
   document.getElementById('detailSection').style.display = state.settings.showDetails ? '' : 'none';
 
@@ -764,6 +803,7 @@ function applySettings() {
   document.getElementById('density').value = state.settings.density;
   document.getElementById('showPoem').checked = state.settings.showPoem;
   document.getElementById('showHourly').checked = state.settings.showHourly;
+  document.getElementById('showMap').checked = state.settings.showMap;
   document.getElementById('showDaily').checked = state.settings.showDaily;
   document.getElementById('showDetails').checked = state.settings.showDetails;
   document.getElementById('reduceMotion').checked = state.settings.reduceMotion;
@@ -774,6 +814,7 @@ function applySettings() {
 
   renderThemePicker();
   renderSavedPlaces();
+  updateMapTheme();
 }
 
 const WEATHER_INFO = {
@@ -866,6 +907,7 @@ async function fetchWeather(lat, lon, name) {
     state.location = { lat, lon, name };
     render();
     updateEffect();
+    updateMapLocation(lat, lon);
     if (isPlaying) {
       stillpointAudio.play(getAudioVariation());
     }
@@ -904,7 +946,6 @@ function render() {
 
   const tempEl = document.getElementById('tempDisplay');
   tempEl.textContent = Math.round(convTemp(cur.temperature_2m)) + '°';
-  // Trigger re-flow to restart animation
   tempEl.classList.remove('anim-temp');
   void tempEl.offsetWidth;
   tempEl.classList.add('anim-temp');
@@ -920,9 +961,9 @@ function render() {
   ].map(m => `
     <div class="card card-tight">
       <div class="text-[10px] uppercase tracking-wider opacity-60 mb-1 whitespace-nowrap overflow-hidden text-ellipsis w-full text-center">${m.l}</div>
-      <div class="display text-xl flex items-baseline justify-center gap-1">
+      <div class="display text-2xl flex items-baseline justify-center gap-1">
         <span>${m.v}</span>
-        ${m.u ? `<span class="text-xs opacity-60">${m.u}</span>` : ''}
+        ${m.u ? `<span class="text-sm opacity-60">${m.u}</span>` : ''}
       </div>
     </div>
   `).join('');
@@ -936,11 +977,11 @@ function render() {
     const precip = w.hourly.precipitation_probability[h.idx] || 0;
     const label = h.t.getHours() + ':00';
     return `
-      <div class="card card-tight" style="min-height: 110px;">
-        <div class="text-[10px] uppercase tracking-wider opacity-60 whitespace-nowrap">${label}</div>
-        <div class="my-1.5 flex justify-center">${icon(code, 26)}</div>
-        <div class="display text-lg whitespace-nowrap">${Math.round(convTemp(temp))}°</div>
-        <div class="text-[10px] opacity-60 mt-0.5 h-[14px]">${precip > 5 ? precip + '%' : ''}</div>
+      <div class="card card-tight" style="min-height: 120px;">
+        <div class="text-xs uppercase tracking-wider opacity-60 whitespace-nowrap">${label}</div>
+        <div class="my-2 flex justify-center">${icon(code, 28)}</div>
+        <div class="display text-xl whitespace-nowrap">${Math.round(convTemp(temp))}°</div>
+        <div class="text-[10px] opacity-60 mt-1 h-[14px]">${precip > 5 ? precip + '%' : ''}</div>
       </div>
     `;
   }).join('');
@@ -963,15 +1004,15 @@ function render() {
     const width = Math.max(8, ((maxC - minC) / allRange) * 100);
 
     return `
-      <div class="flex items-center gap-2 sm:gap-3 py-2.5 border-b last:border-0" style="border-color: var(--border);">
-        <div class="w-10 sm:w-14 text-sm whitespace-nowrap">${day}</div>
+      <div class="flex items-center gap-2 sm:gap-4 py-3 border-b last:border-0" style="border-color: var(--border);">
+        <div class="w-12 sm:w-16 text-sm whitespace-nowrap font-medium">${day}</div>
         <div class="w-8 flex justify-center flex-shrink-0">${icon(code, 24)}</div>
-        <div class="flex-1 flex items-center gap-2 min-w-0">
+        <div class="flex-1 flex items-center gap-3 min-w-0">
           <span class="text-sm opacity-60 w-8 sm:w-10 text-right whitespace-nowrap">${min}°</span>
           <div class="range-bar flex-1">
             <div class="range-fill" style="left: ${left}%; width: ${width}%;"></div>
           </div>
-          <span class="text-sm w-8 sm:w-10 whitespace-nowrap">${max}°</span>
+          <span class="text-sm w-8 sm:w-10 whitespace-nowrap font-medium">${max}°</span>
         </div>
         <div class="text-[10px] opacity-60 w-8 sm:w-10 text-right whitespace-nowrap">${precip > 5 ? precip + '%' : ''}</div>
       </div>
@@ -990,17 +1031,70 @@ function render() {
   ].map(m => `
     <div class="card card-tight">
       <div class="text-[10px] uppercase tracking-wider opacity-60 mb-1 whitespace-nowrap overflow-hidden text-ellipsis w-full text-center">${m.l}</div>
-      <div class="display text-lg flex items-baseline justify-center gap-1">
+      <div class="display text-xl flex items-baseline justify-center gap-1">
         <span>${m.v}</span>
         ${m.u ? `<span class="text-xs opacity-60">${m.u}</span>` : ''}
       </div>
     </div>
   `).join('');
 
-  // Trigger stagger animations
   animateStaggerChildren(document.getElementById('quickMetrics'));
   animateStaggerChildren(document.getElementById('hourlyTrack'));
   animateStaggerChildren(document.getElementById('detailList'));
+}
+
+/* ============================================================
+   Leaflet Map & RainViewer Integration
+   ============================================================ */
+let map = null;
+let baseLayer = null;
+let radarLayer = null;
+
+function initMap(lat, lon) {
+  if (!map) {
+    map = L.map('weatherMap', { 
+      zoomControl: false, 
+      attributionControl: false,
+      preferCanvas: true 
+    }).setView([lat, lon], 8);
+    
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+    
+    // Fetch latest radar frame
+    fetch('https://api.rainviewer.com/public/weather-maps.json')
+      .then(r => r.json())
+      .then(data => {
+        const latestFrame = data.radar.past[data.radar.past.length - 1];
+        const radarUrl = `https://tilecache.rainviewer.com${latestFrame.path}/256/{z}/{x}/{y}/2/1_1.png`;
+        radarLayer = L.tileLayer(radarUrl, { opacity: 0.7, zIndex: 10 });
+        radarLayer.addTo(map);
+      });
+  } else {
+    map.setView([lat, lon], 8);
+  }
+  updateMapTheme();
+}
+
+function updateMapLocation(lat, lon) {
+  if (state.settings.showMap) {
+    initMap(lat, lon);
+  }
+}
+
+function updateMapTheme() {
+  if (!map) return;
+  const resolvedTheme = resolveTheme(state.settings.theme);
+  const t = THEMES.find(x => x.id === resolvedTheme);
+  const isDark = t ? t.isDark : false;
+
+  const newTileUrl = isDark 
+    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' 
+    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+
+  if (baseLayer) map.removeLayer(baseLayer);
+  baseLayer = L.tileLayer(newTileUrl, { zIndex: 1 });
+  baseLayer.addTo(map);
+  if (radarLayer) radarLayer.bringToFront();
 }
 
 function saveCurrentPlace(lat, lon, name) {
@@ -1020,7 +1114,7 @@ function renderSavedPlaces() {
   }
   c.innerHTML = state.settings.savedPlaces.map(p => `
     <button class="w-full text-left p-3 rounded-xl border flex justify-between items-center" style="border-color: var(--border); background: var(--cream-deep);" data-lat="${p.lat}" data-lon="${p.lon}" data-name="${p.name}">
-      <span class="text-sm truncate">${p.name}</span>
+      <span class="text-sm truncate font-medium">${p.name}</span>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="flex-shrink-0"><path d="m9 18 6-6-6-6"/></svg>
     </button>
   `).join('');
@@ -1145,7 +1239,10 @@ function resizeCanvas() {
   fxCanvas.width = window.innerWidth;
   fxCanvas.height = window.innerHeight;
 }
-window.addEventListener('resize', resizeCanvas);
+window.addEventListener('resize', () => {
+  resizeCanvas();
+  if (map) map.invalidateSize();
+});
 resizeCanvas();
 
 function createParticle(type) {
@@ -1350,6 +1447,7 @@ bind('fontSelect', 'font');
 bind('density', 'density');
 bind('showPoem', 'showPoem');
 bind('showHourly', 'showHourly');
+bind('showMap', 'showMap');
 bind('showDaily', 'showDaily');
 bind('showDetails', 'showDetails');
 bind('largeTargets', 'largeTargets');
