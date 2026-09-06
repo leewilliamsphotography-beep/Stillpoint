@@ -222,7 +222,7 @@
 
   /* Toast */
   .toast {
-    position: fixed; bottom: 2rem; left: 50%;
+    position: fixed; bottom: 6rem; left: 50%;
     transform: translateX(-50%) translateY(150%);
     background: var(--bark); color: var(--cream);
     padding: 0.8rem 1.5rem; border-radius: 999px;
@@ -260,15 +260,6 @@
     }
   }
 
-  /* Pull-to-refresh hint */
-  .ptr-hint {
-    position: fixed; top: 0; left: 0; right: 0; height: 0;
-    overflow: hidden; display: flex; align-items: center; justify-content: center;
-    color: var(--bark-soft); font-size: 0.85rem; z-index: 50;
-    transition: height 0.2s ease;
-    pointer-events: none; /* Prevents intercepting taps on the header */
-  }
-
   /* Daily Temp Range Bar - Dynamic Gradient */
   .range-bar { 
     position: relative; height: 8px; 
@@ -287,13 +278,15 @@
   body::-webkit-scrollbar { width: 6px; }
   body::-webkit-scrollbar-thumb { background: var(--terracotta); border-radius: 3px; }
 
-  .top-bar {
-    position: sticky; top: 0; z-index: 40;
+  /* Bottom Navigation Bar */
+  .bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    z-index: 40;
     background: color-mix(in srgb, var(--cream) 75%, transparent);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-bottom: 1px solid var(--border);
-    padding-top: env(safe-area-inset-top, 0);
+    border-top: 1px solid var(--border);
+    padding-bottom: env(safe-area-inset-bottom, 0);
   }
 
   /* Animations */
@@ -317,39 +310,9 @@
 
 <canvas id="fxCanvas"></canvas>
 <div class="atmosphere" aria-hidden="true"></div>
-<div class="ptr-hint" id="ptrHint">Release to refresh</div>
 
-<!-- Top bar -->
-<header class="top-bar">
-  <div class="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between gap-2">
-    <button type="button" id="searchBtn" class="btn btn-icon flex-shrink-0" aria-label="Search location">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-    </button>
-    <div class="flex items-center gap-2 flex-shrink-0">
-      <svg width="24" height="24" viewBox="0 0 1024 1024" aria-hidden="true">
-        <circle cx="512" cy="512" r="320" fill="var(--terracotta)" opacity="0.15"/>
-        <circle cx="512" cy="512" r="220" fill="var(--terracotta)" opacity="0.3"/>
-        <circle cx="512" cy="512" r="120" fill="var(--terracotta)"/>
-      </svg>
-      <h1 class="display text-lg tracking-[0.15em] font-medium uppercase hidden sm:block">Stillpoint</h1>
-    </div>
-    <div class="flex gap-1.5 flex-shrink-0">
-      <button type="button" id="audioBtn" class="btn btn-icon" aria-label="Toggle ambient theme tune">
-        <svg id="audioOffIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-        <svg id="audioOnIcon" style="display:none" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-      </button>
-      <button type="button" id="refreshBtn" class="btn btn-icon" aria-label="Refresh weather">
-        <svg id="refreshIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
-      </button>
-      <button type="button" id="settingsBtn" class="btn btn-icon" aria-label="Open settings">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-      </button>
-    </div>
-  </div>
-</header>
-
-<!-- Main -->
-<main id="main" class="relative z-10 max-w-2xl mx-auto px-5 pb-32 pt-8">
+<!-- Main Content -->
+<main id="main" class="relative z-10 max-w-2xl mx-auto px-5 pb-32 pt-12">
   <div class="flex justify-center mb-6">
     <svg width="64" height="64" viewBox="0 0 1024 1024" aria-hidden="true">
       <circle cx="512" cy="512" r="320" fill="var(--terracotta)" opacity="0.15"/>
@@ -394,6 +357,25 @@
     <p class="mt-2 opacity-80 font-medium tracking-wide">Made by Lee Williams</p>
   </footer>
 </main>
+
+<!-- Bottom Navigation Bar -->
+<nav class="bottom-nav">
+  <div class="max-w-2xl mx-auto px-4 py-2 flex items-center justify-around gap-2">
+    <button type="button" id="searchBtn" class="btn btn-icon flex-shrink-0" aria-label="Search location">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    </button>
+    <button type="button" id="audioBtn" class="btn btn-icon flex-shrink-0" aria-label="Toggle ambient theme tune">
+      <svg id="audioOffIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+      <svg id="audioOnIcon" style="display:none" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+    </button>
+    <button type="button" id="refreshBtn" class="btn btn-icon flex-shrink-0" aria-label="Refresh weather">
+      <svg id="refreshIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
+    </button>
+    <button type="button" id="settingsBtn" class="btn btn-icon flex-shrink-0" aria-label="Open settings">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+  </div>
+</nav>
 
 <!-- Settings drawer -->
 <div class="scrim" id="scrim"></div>
@@ -1170,34 +1152,6 @@ document.getElementById('textScale').addEventListener('input', e => {
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeDrawer(); closeSearch(); }
-});
-
-// Pull-to-refresh
-let touchY = 0, pulling = false;
-const ptrHint = document.getElementById('ptrHint');
-document.addEventListener('touchstart', e => {
-  if (window.scrollY > 0) return;
-  touchY = e.touches[0].clientY;
-  pulling = true;
-}, { passive: true });
-document.addEventListener('touchmove', e => {
-  if (!pulling) return;
-  const dy = e.touches[0].clientY - touchY;
-  if (dy > 0 && dy < 120) {
-    ptrHint.style.height = dy + 'px';
-    ptrHint.style.opacity = Math.min(1, dy / 80);
-  }
-}, { passive: true });
-document.addEventListener('touchend', e => {
-  if (!pulling) return;
-  pulling = false;
-  const dy = e.changedTouches[0].clientY - touchY;
-  if (dy > 80 && state.location) {
-    fetchWeather(state.location.lat, state.location.lon, state.location.name);
-    showToast('Refreshing…');
-  }
-  ptrHint.style.height = '0';
-  ptrHint.style.opacity = '';
 });
 
 // Init
